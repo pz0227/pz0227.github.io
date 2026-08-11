@@ -4,287 +4,321 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Polly Zheng — AI Product Manager</title>
-<meta name="description" content="AI product manager. I study where trust breaks when AI acts on your behalf, then build the fix. Public teardowns, agents, and evaluation.">
+<meta name="description" content="AI product manager. I pay for the AI agents I write about, log what they do wrong, and build the fix.">
 <meta property="og:title" content="Polly Zheng — AI Product Manager">
-<meta property="og:description" content="I study where trust breaks when AI acts on your behalf, then build the fix.">
+<meta property="og:description" content="I pay for the AI agents I write about, log what they do wrong, and build the fix.">
 <meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◎</text></svg>">
 <style>
-  :root{
-    --bg:#fbfaf8; --fg:#1a1a1a; --muted:#6b6b6b; --line:#e2ded8;
-    --accent:#b5451a; --card:#ffffff; --shadow:0 1px 2px rgba(0,0,0,.04);
-    --max:720px;
-  }
-  @media (prefers-color-scheme:dark){
-    :root{ --bg:#121212; --fg:#ededed; --muted:#9a9a9a; --line:#2c2c2c;
-           --accent:#ff8a5c; --card:#191919; --shadow:none; }
-  }
-  :root[data-theme="dark"]{
-    --bg:#121212; --fg:#ededed; --muted:#9a9a9a; --line:#2c2c2c;
-    --accent:#ff8a5c; --card:#191919; --shadow:none;
-  }
-  :root[data-theme="light"]{
-    --bg:#fbfaf8; --fg:#1a1a1a; --muted:#6b6b6b; --line:#e2ded8;
-    --accent:#b5451a; --card:#ffffff; --shadow:0 1px 2px rgba(0,0,0,.04);
-  }
+:root{
+  --bg:#0c0c0d; --panel:#131315; --fg:#f2f0ed; --dim:#8b8985; --faint:#4a4845;
+  --line:#232326; --accent:#ff6a3d; --good:#5ec27a;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --serif:"Instrument Serif",Georgia,serif;
+  --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+:root[data-theme="light"]{
+  --bg:#faf8f5; --panel:#ffffff; --fg:#15150f; --dim:#6a6862; --faint:#a8a49c;
+  --line:#e4e0d8; --accent:#d1451b; --good:#2f7d4a;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--fg); font-family:var(--sans);
+  font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size:28px 28px;
+}
+a{color:inherit}
+.wrap{max-width:860px; margin:0 auto; padding:0 28px}
 
-  *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{
-    margin:0; background:var(--bg); color:var(--fg);
-    font:16px/1.65 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
-  a{color:inherit}
-  h1,h2,h3{line-height:1.25; margin:0; font-weight:650; letter-spacing:-.02em}
+.lab{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint)}
 
-  /* header */
-  header{padding:64px 0 8px}
-  .name{font-size:15px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:28px}
-  h1{font-size:clamp(28px,5.4vw,40px); margin-bottom:20px}
-  h1 em{font-style:normal; color:var(--accent)}
-  .lede{font-size:clamp(16px,2.4vw,18px); color:var(--muted); max-width:56ch}
-  .lede strong{color:var(--fg); font-weight:600}
+/* ---------- hero ---------- */
+header{padding:88px 0 64px}
+.eyebrow{display:flex; align-items:center; gap:12px; margin-bottom:36px}
+.dot{width:7px; height:7px; border-radius:50%; background:var(--good); box-shadow:0 0 0 3px color-mix(in srgb, var(--good) 22%, transparent)}
+h1{
+  font-family:var(--serif); font-weight:400; letter-spacing:-.015em;
+  font-size:clamp(38px,7.4vw,68px); line-height:1.04; margin:0 0 28px; max-width:16ch;
+}
+h1 i{font-style:italic; color:var(--accent)}
+.sub{font-size:clamp(16px,2vw,18.5px); color:var(--dim); max-width:52ch; margin:0}
+.sub b{color:var(--fg); font-weight:500}
 
-  .links{display:flex; flex-wrap:wrap; gap:10px; margin-top:30px}
-  .links a{
-    display:inline-flex; align-items:center; gap:6px;
-    font-size:14px; text-decoration:none; color:var(--fg);
-    border:1px solid var(--line); border-radius:999px; padding:7px 15px;
-    background:var(--card); box-shadow:var(--shadow);
-    transition:border-color .15s, transform .15s;
-  }
-  .links a:hover{border-color:var(--accent); transform:translateY(-1px)}
-  .links a.primary{background:var(--accent); border-color:var(--accent); color:#fff}
+.cta{display:flex; flex-wrap:wrap; gap:9px; margin-top:38px}
+.cta a{
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.03em; text-decoration:none;
+  border:1px solid var(--line); padding:9px 16px; border-radius:6px; background:var(--panel);
+  transition:border-color .16s, color .16s;
+}
+.cta a:hover{border-color:var(--accent); color:var(--accent)}
+.cta a.hi{background:var(--accent); border-color:var(--accent); color:#fff}
+.cta a.hi:hover{color:#fff; opacity:.9}
 
-  /* sections */
-  section{padding:56px 0; border-top:1px solid var(--line); margin-top:56px}
-  .kicker{font-size:12px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin-bottom:24px}
+/* ---------- evidence ---------- */
+.ev{margin-top:76px; border:1px solid var(--line); border-radius:12px; background:var(--panel); overflow:hidden}
+.ev-top{display:flex; justify-content:space-between; align-items:center; padding:14px 20px; border-bottom:1px solid var(--line)}
+.ev-row{display:grid; grid-template-columns:76px 1fr; gap:18px; padding:18px 20px; border-bottom:1px solid var(--line)}
+.ev-row:last-child{border-bottom:0}
+.ev-row .d{font-family:var(--mono); font-size:12px; color:var(--faint); padding-top:2px}
+.ev-row .w{font-size:15px; margin:0 0 5px}
+.ev-row .w code{
+  font-family:var(--mono); font-size:14px; color:var(--accent);
+  background:color-mix(in srgb, var(--accent) 11%, transparent);
+  padding:1px 6px; border-radius:4px;
+}
+.ev-row .why{font-size:13.5px; color:var(--dim); margin:0}
+.ev-foot{padding:15px 20px; font-size:13.5px; color:var(--dim)}
+.ev-foot b{color:var(--fg); font-weight:500}
+@media(max-width:620px){ .ev-row{grid-template-columns:1fr; gap:5px} }
 
-  /* work */
-  .work{display:grid; gap:20px}
-  .item{
-    border:1px solid var(--line); border-radius:12px; padding:24px;
-    background:var(--card); box-shadow:var(--shadow);
-    transition:border-color .15s;
-  }
-  .item:hover{border-color:var(--accent)}
-  .item h3{font-size:19px; margin-bottom:4px}
-  .item .role{font-size:13px; color:var(--muted); margin-bottom:14px}
-  .item p{margin:0 0 14px; font-size:15px}
-  .facts{list-style:none; padding:0; margin:0 0 16px; display:grid; gap:7px}
-  .facts li{font-size:14.5px; color:var(--muted); padding-left:17px; position:relative}
-  .facts li::before{content:"→"; position:absolute; left:0; color:var(--accent)}
-  .facts li b{color:var(--fg); font-weight:600}
-  .go{display:flex; flex-wrap:wrap; gap:8px}
-  .go a{
-    font-size:13.5px; text-decoration:none; color:var(--accent);
-    border-bottom:1px solid transparent; padding-bottom:1px;
-  }
-  .go a:hover{border-color:var(--accent)}
-  .go a::after{content:" ↗"; font-size:11px}
+/* ---------- sections ---------- */
+section{padding:84px 0 0}
+.head{display:flex; align-items:baseline; gap:14px; margin-bottom:34px}
+.head h2{font-family:var(--serif); font-weight:400; font-size:30px; margin:0; letter-spacing:-.01em}
+.rule{flex:1; height:1px; background:var(--line)}
 
-  /* experience */
-  .exp{display:grid; gap:26px}
-  .row{display:grid; grid-template-columns:130px 1fr; gap:20px}
-  .row .when{font-size:13.5px; color:var(--muted); padding-top:2px}
-  .row h3{font-size:16.5px; margin-bottom:3px}
-  .row .co{font-size:13.5px; color:var(--muted); margin-bottom:9px}
-  .row p{margin:0; font-size:14.5px; color:var(--muted)}
-  .row p b{color:var(--fg); font-weight:600}
-  @media (max-width:640px){ .row{grid-template-columns:1fr; gap:6px} }
+/* work */
+.piece{padding:34px 0; border-top:1px solid var(--line)}
+.piece:first-of-type{border-top:0; padding-top:6px}
+.p-top{display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; margin-bottom:14px}
+.p-top h3{font-size:22px; font-weight:600; margin:0; letter-spacing:-.01em}
+.p-top .tag{font-family:var(--mono); font-size:11px; color:var(--faint); letter-spacing:.05em}
+.piece > p{margin:0 0 22px; color:var(--dim); font-size:15.5px; max-width:62ch}
+.piece > p b{color:var(--fg); font-weight:500}
 
-  /* about */
-  .about p{max-width:60ch; margin:0 0 16px}
-  .about p:last-child{margin-bottom:0}
+.stats{display:flex; flex-wrap:wrap; gap:34px; margin:0 0 22px}
+.stat .n{font-family:var(--serif); font-size:40px; line-height:1; color:var(--accent)}
+.stat .t{font-family:var(--mono); font-size:11px; letter-spacing:.05em; color:var(--dim); margin-top:7px; max-width:19ch; line-height:1.45}
 
-  footer{padding:48px 0 72px; border-top:1px solid var(--line); margin-top:56px; color:var(--muted); font-size:14px}
-  footer a{color:var(--fg)}
+.go{display:flex; flex-wrap:wrap; gap:18px}
+.go a{font-family:var(--mono); font-size:12.5px; text-decoration:none; color:var(--accent); border-bottom:1px solid color-mix(in srgb, var(--accent) 35%, transparent); padding-bottom:2px}
+.go a:hover{border-color:var(--accent)}
 
-  .toggle{
-    position:fixed; top:16px; right:16px; z-index:9;
-    width:34px; height:34px; border-radius:999px; cursor:pointer;
-    border:1px solid var(--line); background:var(--card); color:var(--fg);
-    font-size:14px; line-height:1; display:grid; place-items:center;
-  }
+/* experience */
+.job{display:grid; grid-template-columns:104px 1fr; gap:24px; padding:22px 0; border-top:1px solid var(--line)}
+.job:first-of-type{border-top:0}
+.job .yr{font-family:var(--mono); font-size:12px; color:var(--faint); padding-top:4px}
+.job h3{font-size:16.5px; font-weight:600; margin:0 0 2px}
+.job .co{font-size:13px; color:var(--faint); margin-bottom:9px; font-family:var(--mono)}
+.job p{margin:0; font-size:14.5px; color:var(--dim); max-width:60ch}
+.job p b{color:var(--fg); font-weight:500}
+@media(max-width:620px){ .job{grid-template-columns:1fr; gap:6px} }
+
+/* about */
+.about p{max-width:60ch; margin:0 0 18px; font-size:16px; color:var(--dim)}
+.about p b{color:var(--fg); font-weight:500}
+.about p:last-child{margin-bottom:0}
+
+footer{margin-top:88px; padding:30px 0 70px; border-top:1px solid var(--line)}
+.f-in{display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; font-family:var(--mono); font-size:12px; color:var(--faint)}
+.f-in a{color:var(--dim); text-decoration:none}
+.f-in a:hover{color:var(--accent)}
+
+.tog{
+  position:fixed; top:18px; right:18px; z-index:9; width:32px; height:32px;
+  border-radius:8px; cursor:pointer; border:1px solid var(--line);
+  background:var(--panel); color:var(--dim); font-size:13px; display:grid; place-items:center;
+}
+.tog:hover{color:var(--accent); border-color:var(--accent)}
 </style>
 </head>
 <body>
 
-<button class="toggle" id="t" aria-label="Toggle theme">◐</button>
+<button class="tog" id="t" aria-label="Toggle theme">◐</button>
 
 <div class="wrap">
 
   <header>
-    <div class="name">Polly Zheng</div>
-    <h1>I study where trust breaks when AI acts <em>on your behalf</em>, then build the fix.</h1>
-    <p class="lede">
-      AI product manager. I pay for the AI products I write about, use them daily, and log
-      every failure with a date attached. <strong>Feelings are worth investigating. Only
-      evidence gets to be proof.</strong>
+    <div class="eyebrow"><span class="dot"></span><span class="lab">Polly Zheng · AI Product Manager · Open to roles</span></div>
+    <h1>The agent said it worked. <i>It didn't.</i></h1>
+    <p class="sub">
+      I pay for the AI products I write about, use them every day, and log what they do wrong
+      with a date attached. <b>Then I build the fix.</b>
     </p>
-    <div class="links">
-      <a class="primary" href="mailto:pollyzheng0227@gmail.com">Email</a>
+    <div class="cta">
+      <a class="hi" href="mailto:pollyzheng0227@gmail.com">Email me</a>
       <a href="https://www.linkedin.com/in/jh-zheng0227/">LinkedIn</a>
       <a href="https://github.com/pz0227">GitHub</a>
       <a href="https://x.com/pollyyyyyyy_z">X</a>
     </div>
+
+    <div class="ev">
+      <div class="ev-top">
+        <span class="lab">Field notes · AI job-search agent</span>
+        <span class="lab">n = 350+ applications</span>
+      </div>
+
+      <div class="ev-row">
+        <div class="d">07-08</div>
+        <div>
+          <p class="w">Filled my salary expectation with <code>6500095000</code></p>
+          <p class="why">My saved range of 65,000 to 95,000, concatenated into one number. Confidently wrong beats visibly broken, because this one invites you to submit it.</p>
+        </div>
+      </div>
+
+      <div class="ev-row">
+        <div class="d">07-08</div>
+        <div>
+          <p class="w">Listed an employer I have never worked for</p>
+          <p class="why">An identity-level fact, generated instead of read.</p>
+        </div>
+      </div>
+
+      <div class="ev-row">
+        <div class="d">07-08</div>
+        <div>
+          <p class="w">Reported <code>11/11 required fields filled</code></p>
+          <p class="why">While the form it was submitting to flagged a missing resume. The status panel misreports execution state, which weaponizes the trust it just earned.</p>
+        </div>
+      </div>
+
+      <div class="ev-row">
+        <div class="d">07-07</div>
+        <div>
+          <p class="w">Rewrote my resume and invented an <code>18%</code> improvement</p>
+          <p class="why">An interviewer asked me about phrasing I had never seen. Value lands at submit time. The cost arrives weeks later, where no dashboard is looking.</p>
+        </div>
+      </div>
+
+      <div class="ev-foot">
+        Every one of these is invisible to the metric the product optimizes, because the application
+        still goes out and the counter still increments. <b>The metric explains the failure pattern.</b>
+      </div>
+    </div>
   </header>
 
   <section>
-    <div class="kicker">Selected work</div>
-    <div class="work">
+    <div class="head"><h2>Selected work</h2><div class="rule"></div><span class="lab">03</span></div>
 
-      <div class="item">
-        <h3>AI Product Teardowns</h3>
-        <div class="role">Independent research series · ongoing</div>
-        <p>
-          Teardowns of AI products I actually pay for, built from logged daily usage rather than
-          demo tours. One question runs through the series. As AI products act for users instead
-          of just answering them, where does trust break, and what would a PM measure and build
-          to fix it?
-        </p>
-        <ul class="facts">
-          <li>Flagship case built from <b>350+ real applications</b> through an AI job-search agent</li>
-          <li><b>20+ documented failures</b>, each dated and attributed to the pipeline stage that caused it</li>
-          <li>Proposed <b>Trusted Qualified Applications</b> as a replacement north star, with four instrumented proxies</li>
-          <li>Every claim labeled observed, calculated, inferred, or hypothesis</li>
-        </ul>
-        <div class="go">
-          <a href="https://github.com/pz0227/product-teardowns">Read the series</a>
-          <a href="https://github.com/pz0227/product-teardowns/blob/main/jobright-ai/summary.md">Flagship case in 3 minutes</a>
-        </div>
+    <div class="piece">
+      <div class="p-top"><h3>AI Product Teardowns</h3><span class="tag">independent research · ongoing</span></div>
+      <p>
+        The notes above are from the flagship case. I traced every failure back to the pipeline
+        stage that caused it, which showed why better parsing would not have fixed the worst ones,
+        and proposed the north star the product should have been optimizing instead.
+      </p>
+      <div class="stats">
+        <div class="stat"><div class="n">350+</div><div class="t">real applications logged</div></div>
+        <div class="stat"><div class="n">20+</div><div class="t">documented incidents, all dated</div></div>
+        <div class="stat"><div class="n">4</div><div class="t">instrumented proxies behind the new north star</div></div>
       </div>
-
-      <div class="item">
-        <h3>Trust Layer</h3>
-        <div class="role">Interactive prototype · independent concept</div>
-        <p>
-          The diagnosis turned into a product. A pre-submission gate built on one rule: critical
-          facts are read from your verified profile, never generated. Try to submit an invented
-          resume claim and watch the gate respond.
-        </p>
-        <ul class="facts">
-          <li>Read-never-generated policy for identity facts like employer, salary, and work authorization</li>
-          <li>Resume diff with a one-tap acknowledgment before anything carrying your name goes out</li>
-          <li>Designed around the tradeoff that actually matters here, <b>speed against trust</b></li>
-        </ul>
-        <div class="go">
-          <a href="https://pz0227.github.io/product-teardowns/prototypes/jobright-trust-layer/">Try the prototype</a>
-        </div>
+      <div class="go">
+        <a href="https://github.com/pz0227/product-teardowns/blob/main/jobright-ai/summary.md">Flagship case in 3 minutes</a>
+        <a href="https://github.com/pz0227/product-teardowns">Full series</a>
       </div>
+    </div>
 
-      <div class="item">
-        <h3>Kapi</h3>
-        <div class="role">AI product analytics agent · built end to end</div>
-        <p>
-          An agent that answers product questions in plain language, built with retrieval and LLM
-          APIs. Then I wrote the evaluation suite, mostly because I wanted a number I could defend
-          in a room. The eval did not confirm my roadmap. It killed it.
-        </p>
-        <ul class="facts">
-          <li><b>51-case labeled evaluation suite</b> covering answer quality and appropriate refusal</li>
-          <li>I had assumed retrieval was the bottleneck. Fault attribution came out <b>19 model-side against 4 retrieval-side</b></li>
-          <li>The real problem was answering confidently when it should have refused, which is a different roadmap entirely</li>
-        </ul>
-        <div class="go">
-          <a href="https://github.com/pz0227/kapi">See the repo</a>
-        </div>
+    <div class="piece">
+      <div class="p-top"><h3>Trust Layer</h3><span class="tag">interactive prototype</span></div>
+      <p>
+        The diagnosis turned into a product. A pre-submission gate built on one rule.
+        <b>Critical facts are read from your verified profile, never generated.</b>
+        Try to submit an invented resume claim and watch the gate respond.
+      </p>
+      <div class="go">
+        <a href="https://pz0227.github.io/product-teardowns/prototypes/jobright-trust-layer/">Open the prototype</a>
       </div>
+    </div>
 
+    <div class="piece">
+      <div class="p-top"><h3>Kapi</h3><span class="tag">agent, built end to end</span></div>
+      <p>
+        An analytics agent built with retrieval and LLM APIs. Then I wrote the eval, mostly because
+        I wanted a number I could defend in a room. <b>The eval did not confirm my roadmap. It killed it.</b>
+        I had assumed retrieval was the bottleneck. It was not.
+      </p>
+      <div class="stats">
+        <div class="stat"><div class="n">51</div><div class="t">labeled eval cases</div></div>
+        <div class="stat"><div class="n">19<span style="color:var(--faint)">/</span>4</div><div class="t">failures attributed model-side vs retrieval-side</div></div>
+      </div>
+      <div class="go"><a href="https://github.com/pz0227/kapi">See the repo</a></div>
     </div>
   </section>
 
   <section>
-    <div class="kicker">Experience</div>
-    <div class="exp">
+    <div class="head"><h2>Experience</h2><div class="rule"></div><span class="lab">03</span></div>
 
-      <div class="row">
-        <div class="when">2026 — now</div>
-        <div>
-          <h3>AI Product Manager</h3>
-          <div class="co">Digital Robotics · agent-driven analysis for regulated industries</div>
-          <p>
-            Own the Windows MVP. Took a request that arrived as one vague sentence about feature
-            parity and redefined done as <b>a target user can install, launch, recover, and relaunch
-            without a developer</b>. One-click installation replaced a developer-dependent setup.
-            Also evaluated 6+ pre-launch use cases with leadership and narrowed them to 3.
-          </p>
-        </div>
+    <div class="job">
+      <div class="yr">2026 —</div>
+      <div>
+        <h3>AI Product Manager</h3>
+        <div class="co">Digital Robotics</div>
+        <p>
+          Own the Windows MVP. A request arrived as one vague sentence about feature parity, so I
+          redefined done as <b>a target user can install, launch, recover, and relaunch without a
+          developer</b>. Also narrowed 6+ pre-launch use cases down to 3 with leadership.
+        </p>
       </div>
+    </div>
 
-      <div class="row">
-        <div class="when">2025</div>
-        <div>
-          <h3>Data Analyst Intern</h3>
-          <div class="co">A Round Ent · consumer social, dating for Asian American users</div>
-          <p>
-            User and market research across 10+ competing apps, then worked with product, design,
-            and backend to turn recurring pain into onboarding and preference flows. Defined the
-            onboarding metrics and measured the rollout, where completion rose
-            <b>from 52% to 64%</b>.
-          </p>
-        </div>
+    <div class="job">
+      <div class="yr">2025</div>
+      <div>
+        <h3>Data Analyst Intern</h3>
+        <div class="co">A Round Ent · consumer social</div>
+        <p>
+          Research across 10+ competing apps, then worked with product, design, and backend to turn
+          recurring pain into onboarding and preference flows. Defined the metrics and measured the
+          rollout, where completion rose <b>from 52% to 64%</b>.
+        </p>
       </div>
+    </div>
 
-      <div class="row">
-        <div class="when">2023 — 2024</div>
-        <div>
-          <h3>Product Manager</h3>
-          <div class="co">Fukang Import &amp; Export · sourcing for international buyers</div>
-          <p>
-            The most 0-to-1 thing I have done. No PRD, no design team. Built a weighted scorecard
-            across demand, margin, and supply risk to narrow <b>54 supplier options to 18 SKUs</b>,
-            then ran the buyer conversations myself. Produced 8 RFQs and supported five container
-            orders with <b>$300K+ gross profit</b>.
-          </p>
-        </div>
+    <div class="job">
+      <div class="yr">2023 — 24</div>
+      <div>
+        <h3>Product Manager</h3>
+        <div class="co">Fukang Import &amp; Export</div>
+        <p>
+          The most 0-to-1 thing I have done. No PRD, no design team. A weighted scorecard across
+          demand, margin, and supply risk narrowed <b>54 suppliers to 18 SKUs</b>, then I ran the buyer
+          conversations myself. Five container orders, <b>$300K+ gross profit</b>.
+        </p>
       </div>
-
     </div>
   </section>
 
   <section class="about">
-    <div class="kicker">About</div>
+    <div class="head"><h2>About</h2><div class="rule"></div><span class="lab">/</span></div>
     <p>
-      I studied psychology at UC Santa Barbara and then statistics, measurement, and assessment
-      at the University of Pennsylvania. Those two things do different jobs for me.
-      Psychology is why every teardown starts with something that simply feels off.
-      Statistics is why that feeling does not count until it survives evidence.
+      Psychology at UC Santa Barbara, then statistics and measurement at Penn. Those do different
+      jobs for me. <b>Psychology is why every teardown starts with something that simply feels off.
+      Statistics is why that feeling does not count until it survives evidence.</b>
     </p>
     <p>
       What I keep ending up in is the same problem wearing different clothes. A product has to be
       trusted before anyone can use it, and nobody has decided what trusted means or how you would
-      know. That was true for clinical models, for sourcing decisions with real money behind them,
-      and it is true now for agents that act while you are not watching.
-    </p>
-    <p>
-      Currently looking for a full-time product role where the product question is still open.
+      know. Currently looking for a full-time product role where that question is still open.
     </p>
   </section>
 
   <footer>
-    <div class="wrap" style="padding:0">
-      Polly Zheng ·
-      <a href="mailto:pollyzheng0227@gmail.com">pollyzheng0227@gmail.com</a> ·
-      <a href="https://www.linkedin.com/in/jh-zheng0227/">LinkedIn</a> ·
-      <a href="https://github.com/pz0227">GitHub</a> ·
-      <a href="https://x.com/pollyyyyyyy_z">X</a>
+    <div class="f-in">
+      <span>Polly Zheng · San Francisco Bay Area &amp; remote</span>
+      <span>
+        <a href="mailto:pollyzheng0227@gmail.com">Email</a> ·
+        <a href="https://www.linkedin.com/in/jh-zheng0227/">LinkedIn</a> ·
+        <a href="https://github.com/pz0227">GitHub</a> ·
+        <a href="https://x.com/pollyyyyyyy_z">X</a>
+      </span>
     </div>
   </footer>
 
 </div>
 
 <script>
-  var r=document.documentElement, t=document.getElementById('t');
-  var s=localStorage.getItem('theme'); if(s) r.setAttribute('data-theme',s);
-  t.onclick=function(){
-    var cur=r.getAttribute('data-theme');
-    if(!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches ? 'dark':'light';
-    var next = cur==='dark' ? 'light':'dark';
-    r.setAttribute('data-theme',next); localStorage.setItem('theme',next);
-  };
+var r=document.documentElement, t=document.getElementById('t');
+var s=localStorage.getItem('theme'); if(s) r.setAttribute('data-theme',s);
+t.onclick=function(){
+  var cur=r.getAttribute('data-theme') || 'dark';
+  var next = cur==='dark' ? 'light' : 'dark';
+  r.setAttribute('data-theme',next); localStorage.setItem('theme',next);
+};
 </script>
 </body>
 </html>
