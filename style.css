@@ -1,21 +1,21 @@
 :root{
-  --bg:#0c0c0d; --panel:#131315; --panel2:#18181b; --fg:#f2f0ed; --dim:#8b8985; --faint:#4a4845;
-  --line:#232326; --accent:#ff6a3d; --good:#5ec27a; --warn:#e8b84b;
+  --bg:#fdfcfa; --panel:#ffffff; --panel2:#f6f4f0; --fg:#111112; --dim:#5f5d59; --faint:#9b9791;
+  --line:#e6e2da; --accent:#c2410c; --good:#15803d; --warn:#a16207;
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --serif:"Instrument Serif",Georgia,serif;
   --sans:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --serif:var(--sans);
 }
-:root[data-theme="light"]{
-  --bg:#faf8f5; --panel:#ffffff; --panel2:#f4f1ec; --fg:#15150f; --dim:#6a6862; --faint:#a8a49c;
-  --line:#e4e0d8; --accent:#d1451b; --good:#2f7d4a; --warn:#9a7413;
+:root[data-theme="dark"]{
+  --bg:#0f0f10; --panel:#161618; --panel2:#1c1c1f; --fg:#f4f2ef; --dim:#918e89; --faint:#56534f;
+  --line:#26262a; --accent:#ff7a45; --good:#5ec27a; --warn:#e8b84b;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
   margin:0; background:var(--bg); color:var(--fg); font-family:var(--sans);
   font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;
-  background-image:radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
-  background-size:28px 28px;
+  background-image:radial-gradient(120% 60% at 50% -10%, color-mix(in srgb,var(--accent) 5%,transparent), transparent 70%);
+  background-repeat:no-repeat;
 }
 a{color:inherit}
 img{max-width:100%; display:block}
@@ -35,8 +35,8 @@ nav{padding:26px 0; border-bottom:1px solid var(--line)}
 header{padding:80px 0 60px}
 .eyebrow{display:flex; align-items:center; gap:12px; margin-bottom:34px}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 0 3px color-mix(in srgb,var(--good) 22%,transparent)}
-h1{font-family:var(--serif); font-weight:400; letter-spacing:-.015em; font-size:clamp(36px,7vw,64px); line-height:1.05; margin:0 0 26px; max-width:17ch}
-h1 i{font-style:italic; color:var(--accent)}
+h1{font-family:var(--sans); font-weight:680; letter-spacing:-.035em; font-size:clamp(34px,6.2vw,58px); line-height:1.06; margin:0 0 24px; max-width:18ch}
+h1 i{font-style:normal; color:var(--accent)}
 .sub{font-size:clamp(16px,2vw,18px); color:var(--dim); max-width:54ch; margin:0}
 .sub b{color:var(--fg); font-weight:500}
 .hero-grid{display:grid; grid-template-columns:1fr 156px; gap:40px; align-items:start}
@@ -52,7 +52,7 @@ h1 i{font-style:italic; color:var(--accent)}
 /* section head */
 section{padding:76px 0 0}
 .head{display:flex; align-items:baseline; gap:14px; margin-bottom:30px}
-.head h2{font-family:var(--serif); font-weight:400; font-size:29px; margin:0; letter-spacing:-.01em}
+.head h2{font-family:var(--sans); font-weight:640; font-size:25px; margin:0; letter-spacing:-.024em}
 .rule{flex:1; height:1px; background:var(--line)}
 
 /* evidence log */
@@ -75,13 +75,13 @@ code{font-family:var(--mono); font-size:.9em; color:var(--accent); background:co
 .case:hover{padding-left:10px}
 .case:hover h3{color:var(--accent)}
 .c-top{display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; margin-bottom:10px}
-.case h3{font-size:22px; font-weight:600; margin:0; letter-spacing:-.01em; transition:color .16s}
+.case h3{font-size:21px; font-weight:640; letter-spacing:-.022em; margin:0; transition:color .16s}
 .c-tag{font-family:var(--mono); font-size:11px; color:var(--faint); letter-spacing:.05em}
 .case p{margin:0 0 18px; color:var(--dim); font-size:15.5px; max-width:62ch}
 .case .more{font-family:var(--mono); font-size:12px; color:var(--accent)}
 
 .stats{display:flex; flex-wrap:wrap; gap:32px; margin:0 0 18px}
-.stat .n{font-family:var(--serif); font-size:38px; line-height:1; color:var(--accent)}
+.stat .n{font-family:var(--sans); font-weight:660; letter-spacing:-.03em; font-size:34px; line-height:1; color:var(--accent)}
 .stat .t{font-family:var(--mono); font-size:11px; letter-spacing:.04em; color:var(--dim); margin-top:6px; max-width:20ch; line-height:1.45}
 
 /* experience */
@@ -95,7 +95,7 @@ code{font-family:var(--mono); font-size:.9em; color:var(--accent); background:co
 @media(max-width:620px){ .job{grid-template-columns:1fr; gap:6px} }
 
 /* prose (case pages) */
-.prose h2{font-family:var(--serif); font-weight:400; font-size:27px; margin:52px 0 16px; letter-spacing:-.01em}
+.prose h2{font-family:var(--sans); font-weight:640; font-size:24px; margin:52px 0 16px; letter-spacing:-.024em}
 .prose h3{font-size:16px; font-weight:600; margin:30px 0 10px; font-family:var(--mono); letter-spacing:.02em; color:var(--dim); text-transform:uppercase; font-size:12px}
 .prose p{margin:0 0 17px; color:var(--dim); font-size:16px}
 .prose p b, .prose li b{color:var(--fg); font-weight:500}
@@ -132,7 +132,7 @@ code{font-family:var(--mono); font-size:.9em; color:var(--accent); background:co
 .compare{display:grid; grid-template-columns:1fr 1fr; gap:14px}
 .cmp{border:1px solid var(--line); border-radius:8px; padding:16px; background:var(--panel2)}
 .cmp .k{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin-bottom:8px}
-.cmp .v{font-family:var(--serif); font-size:34px; line-height:1; color:var(--fg)}
+.cmp .v{font-family:var(--sans); font-weight:660; letter-spacing:-.03em; font-size:30px; line-height:1; color:var(--fg)}
 .cmp .v.up{color:var(--good)}
 .cmp .m{font-family:var(--mono); font-size:11px; color:var(--dim); margin-top:7px}
 @media(max-width:620px){ .compare{grid-template-columns:1fr} }
