@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rebuilding trust in an AI job-search agent — Polly Zheng</title>
+<meta name="description" content="350+ logged applications, 20+ dated failures, a replacement north star, and a working prototype of the fix.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◎</text></svg>">
+</head>
+<body>
+<button class="tog" id="t" aria-label="Toggle theme">◐</button>
+<div class="wrap">
+
+<nav><div class="nav-in"><a class="home" href="index.html">← Polly Zheng</a>
+<span class="nav-links"><a href="case-kapi.html">Kapi</a><a href="case-windows.html">Windows MVP</a><a href="case-onboarding.html">Onboarding</a></span></div></nav>
+
+<header style="padding:60px 0 30px">
+  <div class="lab" style="margin-bottom:20px">Case study · independent research + prototype · 2026</div>
+  <h1 style="font-size:clamp(32px,5.6vw,50px); max-width:20ch">Rebuilding trust in an AI job-search agent</h1>
+  <p class="sub">I pay for it. I used it for 350+ applications. Then it started representing me in ways I could not defend.</p>
+</header>
+
+<div class="narrow prose" style="margin:0 auto">
+
+  <span class="par">Problem</span>
+  <h2>The counter went up. The applications were wrong.</h2>
+  <p>I am a paying user of an AI agent that finds jobs, tailors a resume for each one, fills the application, and can submit on my behalf. That last part is the whole product. I am delegating the most consequential paperwork of my professional life to something that acts while I am not watching.</p>
+  <p>It is genuinely fast, which is why I paid. But across sustained daily use I kept finding output I could not stand behind. I started logging it properly, with dates and screenshots, because I wanted to know whether I was annoyed or whether something was actually broken.</p>
+
+  <div class="fig">
+    <div class="fig-t">Sample of the logged incidents</div>
+    <div class="ev" style="border:0">
+      <div class="ev-row" style="padding-left:0;padding-right:0"><div class="d">07-08</div><div>
+        <p class="w">Salary expectation filled as <code>6500095000</code></p>
+        <p class="why">My saved range of 65,000 to 95,000, concatenated into a single number.</p></div></div>
+      <div class="ev-row" style="padding-left:0;padding-right:0"><div class="d">07-08</div><div>
+        <p class="w">"Name of Latest Employer" filled with a firm I never worked at</p>
+        <p class="why">Identity-level fact, generated rather than read from my profile.</p></div></div>
+      <div class="ev-row" style="padding-left:0;padding-right:0"><div class="d">07-08</div><div>
+        <p class="w"><code>11/11 required fields filled · Submit Now</code></p>
+        <p class="why">While the ATS itself flagged the missing resume. Six screenshots of this class.</p></div></div>
+      <div class="ev-row" style="padding-left:0;padding-right:0"><div class="d">07-07</div><div>
+        <p class="w">Tailored resume invented an <code>18%</code> improvement metric</p>
+        <p class="why">A rewrite I had never seen, later probed by a real interviewer.</p></div></div>
+      <div class="ev-row" style="padding-left:0;padding-right:0"><div class="d">07-07</div><div>
+        <p class="w">3 of 7 top recommendations usable against my saved hard constraints</p>
+        <p class="why">Calculated, 43%. The feed erodes trust in the layer above the agent.</p></div></div>
+    </div>
+    <div class="fig-c">All entries dated, from my own logged usage. 20+ incidents documented in total.</div>
+  </div>
+
+  <h3>The pattern underneath</h3>
+  <p>Once there were enough of them, the shape was obvious. <b>Every single failure is invisible to the metric this product appears to optimize.</b> The application still goes out. The counter still increments. The dashboard stays green.</p>
+  <blockquote><p>Value is front-loaded. Trust cost is back-loaded. And the submit button is the boundary between them. Before submission an error is a draft problem. After submission, the error is me.</p></blockquote>
+  <p>That reframes the whole thing. This is not a parsing quality issue. It is a <b>measurement</b> issue. The product is succeeding at the thing it counts.</p>
+
+  <span class="par act">Action</span>
+  <h2>Attribute the failures, then replace the metric</h2>
+
+  <h3>1 · Attribute each failure to a pipeline stage</h3>
+  <p>I sorted every logged incident by the stage that produced it rather than by how it looked to me. That mattered because it answered a question the team would have to answer. <b>Would better parsing fix this?</b> For the worst class, the answer was no. A salary field concatenated from my own saved range is not a comprehension failure. It is a policy failure about when the system is allowed to generate rather than read.</p>
+
+  <h3>2 · Propose the north star it should have been using</h3>
+  <p>If the metric explains the failure pattern, the metric has to change. I defined <b>Trusted Qualified Applications</b>. An application only counts if all four conditions hold.</p>
+
+  <div class="fig">
+    <div class="fig-t">Trusted Qualified Applications · four conditions, four measurable proxies</div>
+    <div class="grid4">
+      <div class="g4"><div class="k">1 · Qualified</div><ul>
+        <li>Meets the user's saved hard constraints</li><li>Proxy: <b>constraint-violation rate</b></li></ul></div>
+      <div class="g4"><div class="k">2 · Read, not generated</div><ul>
+        <li>Every critical fact comes from the canonical profile</li><li>Proxy: <b>critical-field correction rate</b></li></ul></div>
+      <div class="g4"><div class="k">3 · Actually submitted</div><ul>
+        <li>Completion derived from the ATS, not the agent's belief</li><li>Proxy: <b>verified-submission rate</b></li></ul></div>
+      <div class="g4"><div class="k">4 · Interview-ready</div><ul>
+        <li>Every change traceable and explainable by the user</li><li>Proxy: <b>diff-acknowledgment rate</b></li></ul></div>
+    </div>
+    <div class="fig-c">Each condition maps to something you can query, so trust becomes steerable instead of aspirational.</div>
+  </div>
+
+  <h3>3 · Write the instrumentation, not just the slogan</h3>
+  <p>A north star nobody can query is a poster. I wrote the event schema that turns each proxy into an actual query, including how to handle the case where absence of an error is not evidence of correctness.</p>
+
+  <h3>4 · Build the fix and let people try to break it</h3>
+  <p>The recommendation was a pre-submission trust layer built on one rule. <b>Critical facts are read, never generated.</b> Employer, education, work authorization, referral, salary. When the agent is unsure it stops and asks about that one application while everything else keeps flowing.</p>
+  <p>I built it as a working prototype rather than a spec, and that decision paid for itself immediately. On paper I had written that the agent should pause whenever it is uncertain. Once it existed and I clicked through it, pausing on every uncertain field was unusable. <b>The real design question turned out to be which fields are worth stopping for</b>, and I only found that by having something to click.</p>
+
+  <div class="fig">
+    <div class="fig-t">Prototype · pre-submission trust layer</div>
+    <div class="funnel">
+      <div class="fn"><div class="fn-bar">Agent fills the application</div><div class="fn-n">as today</div></div>
+      <div class="fn"><div class="fn-bar">Critical fields checked against canonical profile</div><div class="fn-n">read-only policy</div></div>
+      <div class="fn"><div class="fn-bar">Unsupported claim detected in the tailored resume</div><div class="fn-n">diff shown</div></div>
+      <div class="fn"><div class="fn-bar">One-tap acknowledgment, or reject</div><div class="fn-n">user decides</div></div>
+      <div class="fn"><div class="fn-bar" style="border-color:var(--accent);color:var(--accent)">Submission gate releases</div><div class="fn-n">verified state</div></div>
+    </div>
+    <div class="fig-c">Independent concept, not affiliated with the product. <a href="https://pz0227.github.io/product-teardowns/prototypes/jobright-trust-layer/" style="color:var(--accent)">Try it →</a></div>
+  </div>
+
+  <span class="par res">Result</span>
+  <h2>What came out of it</h2>
+  <ul>
+    <li>A dated, public evidence log of <b>20+ incidents across 350+ applications</b>, with every claim labeled observed, calculated, inferred, or hypothesis</li>
+    <li>A replacement north star with <b>four instrumented proxies</b> and the event schema to query them</li>
+    <li>A <b>working prototype</b> of the trust gate, which surfaced a design flaw that the written version had hidden</li>
+    <li>A usability test plan that states in advance <b>what result would prove the design wrong</b>, including the possibility that the warning is theater</li>
+  </ul>
+  <p>The reason I keep coming back to this case is that it is the clearest example of the thing I actually do. The hard part was never the model. It was that nobody had decided what a good outcome looks like, so the system optimized the only number available.</p>
+
+  <div class="honest">
+    <div class="k">What this evidence does not support</div>
+    <p>This is <b>one user</b>. I have documented incidents, not rates. I cannot tell you how often a critical-field error happens across the population, and I do not claim to. The validation plan I wrote describes how I would turn these incidents into rates, using random application audits rather than my own opportunistic screenshots. <b>Sustained, dated, single-user evidence is enough to justify investigation. It is not enough to size a problem.</b></p>
+  </div>
+
+  <div class="next">
+    <a href="https://github.com/pz0227/product-teardowns">Full teardown on GitHub →</a>
+    <a href="case-kapi.html">Next case: the eval that killed my roadmap →</a>
+  </div>
+</div>
+
+<footer><div class="f-in">
+  <span>Polly Zheng</span>
+  <span><a href="mailto:pollyzheng0227@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/jh-zheng0227/">LinkedIn</a> · <a href="https://github.com/pz0227">GitHub</a></span>
+</div></footer>
+</div>
+<script>
+var r=document.documentElement,t=document.getElementById('t');
+var s=localStorage.getItem('theme'); if(s) r.setAttribute('data-theme',s);
+t.onclick=function(){var c=r.getAttribute('data-theme')||'dark';var n=c==='dark'?'light':'dark';r.setAttribute('data-theme',n);localStorage.setItem('theme',n)};
+</script>
+</body>
+</html>

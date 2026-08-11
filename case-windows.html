@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What does "works on Windows" actually mean? — Polly Zheng</title>
+<meta name="description" content="A vague feature-parity request, two user groups with different definitions of done, and the acceptance criteria that settled it.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◎</text></svg>">
+</head>
+<body>
+<button class="tog" id="t" aria-label="Toggle theme">◐</button>
+<div class="wrap">
+
+<nav><div class="nav-in"><a class="home" href="index.html">← Polly Zheng</a>
+<span class="nav-links"><a href="case-jobright.html">Trust layer</a><a href="case-kapi.html">Kapi</a><a href="case-onboarding.html">Onboarding</a></span></div></nav>
+
+<header style="padding:60px 0 30px">
+  <div class="lab" style="margin-bottom:20px">Case study · Digital Robotics · MVP definition · 2026</div>
+  <h1 style="font-size:clamp(32px,5.6vw,50px); max-width:20ch">What does "works on Windows" actually mean?</h1>
+  <p class="sub">The request had no definition inside it. Three groups of people each had a different one, and nobody had picked.</p>
+</header>
+
+<div class="narrow prose" style="margin:0 auto">
+
+  <span class="par">Problem</span>
+  <h2>Feature parity is not a requirement</h2>
+  <p>Digital Robotics is a twelve-person startup building agent-driven analysis products for regulated industries. The product was Mac-first. The request that reached me was, in effect, bring it to Windows with feature parity.</p>
+  <p>That sounds like an engineering task. It is not, because <b>"feature parity" is not a definition of done, it is a placeholder for one</b>. Depending on who you asked, done meant three different things.</p>
+
+  <div class="fig">
+    <div class="fig-t">The same word, three meanings</div>
+    <div class="funnel">
+      <div class="fn"><div class="fn-bar">Engineering · "the application and its services run on Windows"</div><div class="fn-n">reasonable</div></div>
+      <div class="fn"><div class="fn-bar">End user · "I can install it and use it without help"</div><div class="fn-n">reasonable</div></div>
+      <div class="fn"><div class="fn-bar">Internal demo · "we can launch it again tomorrow without an engineer"</div><div class="fn-n">reasonable</div></div>
+    </div>
+    <div class="fig-c">All three are defensible. Shipping against the first one produces something that technically works and that no customer can use.</div>
+  </div>
+
+  <p>The cost of guessing wrong here is specific. If we shipped against the engineering definition, every Windows demo becomes a development environment, every customer session needs a person who knows which process crashed, and the product looks broken to exactly the people we were trying to reach.</p>
+
+  <span class="par act">Action</span>
+  <h2>Pick the users, then write down what has to be true</h2>
+
+  <h3>1 · Name the two groups the MVP is for</h3>
+  <p>I did not run a six-week persona study. In an early-stage startup you rarely get to. What I did was notice that "Windows version works" meant different things to different people and force a choice between them, defining the MVP around the two groups whose experience actually decided whether this shipped.</p>
+  <ul>
+    <li><b>The non-technical Windows user.</b> Their test is one sentence. Can I install it, open it, and use it without understanding the stack underneath? No Python or Node environment, no terminal commands, no manually starting services, no knowing which background process died.</li>
+    <li><b>The internal demo and validation team.</b> Leadership and colleagues who need to launch the Windows build repeatedly. Their test is different. Can we launch the same environment again, reliably, without an engineer in the room?</li>
+  </ul>
+
+  <h3>2 · Reframe the definition of done</h3>
+  <blockquote><p>I moved the definition of done from "the software runs on Windows" to <b>"a target user can install, launch, recover, and relaunch it without developer intervention."</b></p></blockquote>
+  <p>That one sentence is the entire product contribution. Everything after it is execution against a target that now exists.</p>
+
+  <h3>3 · Turn it into acceptance criteria someone else can check</h3>
+  <p>A definition nobody can verify is an opinion. I broke it into four categories, each one checkable by a person who was not me.</p>
+
+  <div class="fig">
+    <div class="fig-t">Acceptance criteria · four categories</div>
+    <div class="grid4">
+      <div class="g4"><div class="k">Setup</div><ul>
+        <li>One-click installation</li><li>No manual environment configuration</li><li>No terminal dependency for normal use</li></ul></div>
+      <div class="g4"><div class="k">Launch</div><ul>
+        <li>Required services start automatically</li><li>Consistent application startup</li><li>Warm launch around 7 seconds</li></ul></div>
+      <div class="g4"><div class="k">Reliability</div><ul>
+        <li>Duplicate processes prevented</li><li>Failed services detected</li><li>Automatic recovery where possible</li></ul></div>
+      <div class="g4"><div class="k">Lifecycle</div><ul>
+        <li>Predictable shutdown</li><li>Clean relaunch</li><li>User never manages background services</li></ul></div>
+    </div>
+    <div class="fig-c">Warm launch measured from launcher invocation to app-ready on our test setup.</div>
+  </div>
+
+  <h3>4 · Then do the same thing one level up</h3>
+  <p>The same ambiguity existed in what we should be showing customers at all. There were more than six candidate use cases being discussed for pre-launch positioning and demos, and the team was trying to be ready for all of them. I structured that comparison rather than deciding it, scoring each candidate on three dimensions and working through the tradeoffs with leadership.</p>
+
+  <div class="fig">
+    <div class="fig-t">Use-case prioritization · 6+ candidates down to 3</div>
+    <div class="bars">
+      <div class="bar-row"><div class="bl">Customer relevance</div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="bv">?</div></div>
+      <div class="bar-row"><div class="bl">Technical readiness</div><div class="bar-track"><div class="bar-fill g" style="width:100%"></div></div><div class="bv">?</div></div>
+      <div class="bar-row"><div class="bl">Dependency risk</div><div class="bar-track"><div class="bar-fill y" style="width:100%"></div></div><div class="bv">?</div></div>
+    </div>
+    <div class="fig-c">Relevance asked whether it maps to a problem the customer already has. Readiness asked whether the product could support it without an engineer intervening mid-demo, assessed with the technical team. Dependency risk asked how many other things had to be finished first, which is what separates a good long-term idea from a good idea for this stage.</div>
+  </div>
+
+  <span class="par res">Result</span>
+  <h2>The outcome was not seven seconds</h2>
+  <p>It is tempting to lead with the performance number. That would be the wrong summary.</p>
+  <blockquote><p>The real outcome was <b>reducing operational dependency on engineering</b>. Instead of treating every Windows demo or validation session like a development environment, we had a repeatable product experience that could be installed, launched, and recovered consistently.</p></blockquote>
+  <ul>
+    <li>Windows moved from a <b>developer-dependent setup</b> to one-click installation</li>
+    <li>Automatic recovery when a background service fails, so a crash stops being a support event</li>
+    <li>Warm launch around <b>7 seconds</b>, which made relaunching cheap enough that demos stopped being precious</li>
+    <li>Leadership discussion moved from "AI can do many things" to <b>"here are the three we are showing"</b></li>
+  </ul>
+  <p>What I took from it is that technical parity was never the goal, and the hardest part was not code. It was that the problem arrived undefined, nobody else was going to define it, and the cost of guessing was a product that passed engineering and failed a customer.</p>
+
+  <div class="honest">
+    <div class="k">Being precise about my role</div>
+    <p>The seven seconds is an <b>observed result</b>, not a target I optimized toward or a company KPI. We used warm-launch time as a practical validation check because repeatability mattered for demos, and that is what it came out at. On the use-case work, I want to be careful not to overstate it. <b>I was not independently setting company strategy.</b> My contribution was structuring the comparison, clarifying the customer problem behind each candidate, surfacing the tradeoffs, and helping leadership make the call.</p>
+  </div>
+
+  <div class="next">
+    <a href="index.html">← All cases</a>
+    <a href="case-onboarding.html">Next case: a 23% lift I refused to call causal →</a>
+  </div>
+</div>
+
+<footer><div class="f-in">
+  <span>Polly Zheng</span>
+  <span><a href="mailto:pollyzheng0227@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/jh-zheng0227/">LinkedIn</a> · <a href="https://github.com/pz0227">GitHub</a></span>
+</div></footer>
+</div>
+<script>
+var r=document.documentElement,t=document.getElementById('t');
+var s=localStorage.getItem('theme'); if(s) r.setAttribute('data-theme',s);
+t.onclick=function(){var c=r.getAttribute('data-theme')||'dark';var n=c==='dark'?'light':'dark';r.setAttribute('data-theme',n);localStorage.setItem('theme',n)};
+</script>
+</body>
+</html>

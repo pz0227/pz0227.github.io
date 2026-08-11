@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The eval that killed my roadmap — Polly Zheng</title>
+<meta name="description" content="I built an analytics agent, then wrote the eval that proved I had been optimizing the wrong half of the system.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◎</text></svg>">
+</head>
+<body>
+<button class="tog" id="t" aria-label="Toggle theme">◐</button>
+<div class="wrap">
+
+<nav><div class="nav-in"><a class="home" href="index.html">← Polly Zheng</a>
+<span class="nav-links"><a href="case-jobright.html">Trust layer</a><a href="case-windows.html">Windows MVP</a><a href="case-onboarding.html">Onboarding</a></span></div></nav>
+
+<header style="padding:60px 0 30px">
+  <div class="lab" style="margin-bottom:20px">Case study · Kapi · agent built end to end · 2026</div>
+  <h1 style="font-size:clamp(32px,5.6vw,50px); max-width:19ch">The eval that killed my roadmap</h1>
+  <p class="sub">I spent weeks improving retrieval. Then I measured, and retrieval was mostly fine.</p>
+</header>
+
+<div class="narrow prose" style="margin:0 auto">
+
+  <span class="par">Problem</span>
+  <h2>A demo that works is not a product that works</h2>
+  <p>Kapi is an AI product analytics agent I built end to end. You ask a product question in plain language, it retrieves what it needs, and it answers. Built with retrieval, embeddings, and LLM APIs, on top of the open-source OpenClaw framework by Peter Steinberger, MIT licensed.</p>
+  <p>It demoed well, which is exactly the problem. Every AI product demos well, because you drive the demo. What I could not answer was the only question that matters before anyone relies on it. <b>How often is it wrong, and what kind of wrong?</b></p>
+  <p>My working assumption was that retrieval was the weak link. That is where I was spending my time. It is also the intuitive answer, because when a grounded system says something false, the obvious story is that it fetched the wrong context.</p>
+
+  <span class="par act">Action</span>
+  <h2>Build the measurement before trusting the intuition</h2>
+
+  <h3>1 · A labeled eval set, not a vibe check</h3>
+  <p>I built a <b>51-case labeled evaluation suite</b> run against the live system, real model and real retrieval. Each case was scored on separate axes rather than one blended quality number, because "good" here is at least two different things.</p>
+  <ul>
+    <li><b>Competence</b>, whether the answer is correct and useful</li>
+    <li><b>Honesty</b>, whether it refuses when it should refuse</li>
+  </ul>
+  <p>Those have to be separate. A system that answers everything confidently scores well on one and catastrophically on the other, and a single blended score would hide it.</p>
+
+  <div class="fig">
+    <div class="fig-t">51-case live evaluation · headline scores</div>
+    <div class="compare">
+      <div class="cmp"><div class="k">Competence</div><div class="v">0.516</div><div class="m">correct and useful</div></div>
+      <div class="cmp"><div class="k">Honesty</div><div class="v">0.600</div><div class="m">refuses when it should</div></div>
+    </div>
+    <div class="fig-c">Judge agreement, Cohen's κ = 0.556. Moderate, which I report rather than hide, because it bounds how much any single score is worth.</div>
+  </div>
+
+  <h3>2 · Classify the failures instead of counting them</h3>
+  <p>A score tells you there is a problem. It does not tell you which problem. So I categorized every failure by what actually went wrong.</p>
+
+  <div class="fig">
+    <div class="fig-t">Failure modes across the 51 cases</div>
+    <div class="bars">
+      <div class="bar-row"><div class="bl">hallucinated_fact</div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="bv">9</div></div>
+      <div class="bar-row"><div class="bl">missed_refusal</div><div class="bar-track"><div class="bar-fill" style="width:89%"></div></div><div class="bv">8</div></div>
+      <div class="bar-row"><div class="bl">retrieval_miss</div><div class="bar-track"><div class="bar-fill mute" style="width:44%"></div></div><div class="bv">4</div></div>
+      <div class="bar-row"><div class="bl">false_refusal</div><div class="bar-track"><div class="bar-fill mute" style="width:22%"></div></div><div class="bv">2</div></div>
+    </div>
+    <div class="fig-c">The top two are both the same underlying behavior. The system talks when it should stop.</div>
+  </div>
+
+  <h3>3 · Attribute fault to a component</h3>
+  <p>Failure mode still is not enough to act on, because a hallucinated fact could be caused by bad context or by the model ignoring good context. So the last step was attributing each failure to the component responsible.</p>
+
+  <div class="fig">
+    <div class="fig-t">Fault attribution · where the failures actually came from</div>
+    <div class="bars">
+      <div class="bar-row"><div class="bl">Model</div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="bv">19</div></div>
+      <div class="bar-row"><div class="bl">Retriever</div><div class="bar-track"><div class="bar-fill mute" style="width:21%"></div></div><div class="bv">4</div></div>
+    </div>
+    <div class="fig-c">This is the number that changed the roadmap. I had been working on the short bar.</div>
+  </div>
+
+  <span class="par res">Result</span>
+  <h2>Two completely different roadmaps</h2>
+  <p>The eval did not confirm my plan. It replaced it.</p>
+  <blockquote><p>Retrieval was mostly fine. The real product problem was the agent answering confidently when it should have refused. If I had trusted my intuition for another month, I would have shipped a better retriever attached to the same failure.</p></blockquote>
+  <ul>
+    <li>Roadmap redirected from retrieval quality toward <b>answer reliability and appropriate refusal</b></li>
+    <li><b>Competence and honesty tracked separately</b> from then on, so improving one at the cost of the other is visible instead of invisible</li>
+    <li>Judge agreement reported alongside every score, because a score from an unreliable judge is not a score</li>
+  </ul>
+  <p>The transferable lesson is smaller than the numbers make it sound. <b>An eval is not a QA step at the end. It is the thing that tells you which roadmap you are actually on.</b> I wrote mine because I wanted a number for a deck, and it cost me a plan I liked.</p>
+
+  <div class="honest">
+    <div class="k">What this evidence does not support</div>
+    <p>Fifty-one cases is small, and κ = 0.556 is moderate agreement rather than strong. These numbers are good enough to <b>redirect my own effort</b>, which is what I used them for. They are not good enough to publish as a benchmark or to compare systems against each other. I also want to be precise that this is the live evaluation. I ran a separate offline evaluation of the deterministic routing layer on a 31-case dev set, and those two sets of numbers are not interchangeable.</p>
+  </div>
+
+  <div class="next">
+    <a href="https://github.com/pz0227/kapi">Kapi on GitHub →</a>
+    <a href="case-windows.html">Next case: what does "works on Windows" mean? →</a>
+  </div>
+</div>
+
+<footer><div class="f-in">
+  <span>Polly Zheng</span>
+  <span><a href="mailto:pollyzheng0227@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/jh-zheng0227/">LinkedIn</a> · <a href="https://github.com/pz0227">GitHub</a></span>
+</div></footer>
+</div>
+<script>
+var r=document.documentElement,t=document.getElementById('t');
+var s=localStorage.getItem('theme'); if(s) r.setAttribute('data-theme',s);
+t.onclick=function(){var c=r.getAttribute('data-theme')||'dark';var n=c==='dark'?'light':'dark';r.setAttribute('data-theme',n);localStorage.setItem('theme',n)};
+</script>
+</body>
+</html>
