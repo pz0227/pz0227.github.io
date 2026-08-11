@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polly Zheng — AI Product Manager</title>
+<meta name="description" content="AI product manager. I study where trust breaks when AI acts on your behalf, then build the fix. Public teardowns, agents, and evaluation.">
+<meta property="og:title" content="Polly Zheng — AI Product Manager">
+<meta property="og:description" content="I study where trust breaks when AI acts on your behalf, then build the fix.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◎</text></svg>">
+<style>
+  :root{
+    --bg:#fbfaf8; --fg:#1a1a1a; --muted:#6b6b6b; --line:#e2ded8;
+    --accent:#b5451a; --card:#ffffff; --shadow:0 1px 2px rgba(0,0,0,.04);
+    --max:720px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{ --bg:#121212; --fg:#ededed; --muted:#9a9a9a; --line:#2c2c2c;
+           --accent:#ff8a5c; --card:#191919; --shadow:none; }
+  }
+  :root[data-theme="dark"]{
+    --bg:#121212; --fg:#ededed; --muted:#9a9a9a; --line:#2c2c2c;
+    --accent:#ff8a5c; --card:#191919; --shadow:none;
+  }
+  :root[data-theme="light"]{
+    --bg:#fbfaf8; --fg:#1a1a1a; --muted:#6b6b6b; --line:#e2ded8;
+    --accent:#b5451a; --card:#ffffff; --shadow:0 1px 2px rgba(0,0,0,.04);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font:16px/1.65 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
+  a{color:inherit}
+  h1,h2,h3{line-height:1.25; margin:0; font-weight:650; letter-spacing:-.02em}
+
+  /* header */
+  header{padding:64px 0 8px}
+  .name{font-size:15px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:28px}
+  h1{font-size:clamp(28px,5.4vw,40px); margin-bottom:20px}
+  h1 em{font-style:normal; color:var(--accent)}
+  .lede{font-size:clamp(16px,2.4vw,18px); color:var(--muted); max-width:56ch}
+  .lede strong{color:var(--fg); font-weight:600}
+
+  .links{display:flex; flex-wrap:wrap; gap:10px; margin-top:30px}
+  .links a{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:14px; text-decoration:none; color:var(--fg);
+    border:1px solid var(--line); border-radius:999px; padding:7px 15px;
+    background:var(--card); box-shadow:var(--shadow);
+    transition:border-color .15s, transform .15s;
+  }
+  .links a:hover{border-color:var(--accent); transform:translateY(-1px)}
+  .links a.primary{background:var(--accent); border-color:var(--accent); color:#fff}
+
+  /* sections */
+  section{padding:56px 0; border-top:1px solid var(--line); margin-top:56px}
+  .kicker{font-size:12px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin-bottom:24px}
+
+  /* work */
+  .work{display:grid; gap:20px}
+  .item{
+    border:1px solid var(--line); border-radius:12px; padding:24px;
+    background:var(--card); box-shadow:var(--shadow);
+    transition:border-color .15s;
+  }
+  .item:hover{border-color:var(--accent)}
+  .item h3{font-size:19px; margin-bottom:4px}
+  .item .role{font-size:13px; color:var(--muted); margin-bottom:14px}
+  .item p{margin:0 0 14px; font-size:15px}
+  .facts{list-style:none; padding:0; margin:0 0 16px; display:grid; gap:7px}
+  .facts li{font-size:14.5px; color:var(--muted); padding-left:17px; position:relative}
+  .facts li::before{content:"→"; position:absolute; left:0; color:var(--accent)}
+  .facts li b{color:var(--fg); font-weight:600}
+  .go{display:flex; flex-wrap:wrap; gap:8px}
+  .go a{
+    font-size:13.5px; text-decoration:none; color:var(--accent);
+    border-bottom:1px solid transparent; padding-bottom:1px;
+  }
+  .go a:hover{border-color:var(--accent)}
+  .go a::after{content:" ↗"; font-size:11px}
+
+  /* experience */
+  .exp{display:grid; gap:26px}
+  .row{display:grid; grid-template-columns:130px 1fr; gap:20px}
+  .row .when{font-size:13.5px; color:var(--muted); padding-top:2px}
+  .row h3{font-size:16.5px; margin-bottom:3px}
+  .row .co{font-size:13.5px; color:var(--muted); margin-bottom:9px}
+  .row p{margin:0; font-size:14.5px; color:var(--muted)}
+  .row p b{color:var(--fg); font-weight:600}
+  @media (max-width:640px){ .row{grid-template-columns:1fr; gap:6px} }
+
+  /* about */
+  .about p{max-width:60ch; margin:0 0 16px}
+  .about p:last-child{margin-bottom:0}
+
+  footer{padding:48px 0 72px; border-top:1px solid var(--line); margin-top:56px; color:var(--muted); font-size:14px}
+  footer a{color:var(--fg)}
+
+  .toggle{
+    position:fixed; top:16px; right:16px; z-index:9;
+    width:34px; height:34px; border-radius:999px; cursor:pointer;
+    border:1px solid var(--line); background:var(--card); color:var(--fg);
+    font-size:14px; line-height:1; display:grid; place-items:center;
+  }
+</style>
+</head>
+<body>
+
+<button class="toggle" id="t" aria-label="Toggle theme">◐</button>
+
+<div class="wrap">
+
+  <header>
+    <div class="name">Polly Zheng</div>
+    <h1>I study where trust breaks when AI acts <em>on your behalf</em>, then build the fix.</h1>
+    <p class="lede">
+      AI product manager. I pay for the AI products I write about, use them daily, and log
+      every failure with a date attached. <strong>Feelings are worth investigating. Only
+      evidence gets to be proof.</strong>
+    </p>
+    <div class="links">
+      <a class="primary" href="mailto:pollyzheng0227@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/jh-zheng0227/">LinkedIn</a>
+      <a href="https://github.com/pz0227">GitHub</a>
+      <a href="https://x.com/pollyyyyyyy_z">X</a>
+    </div>
+  </header>
+
+  <section>
+    <div class="kicker">Selected work</div>
+    <div class="work">
+
+      <div class="item">
+        <h3>AI Product Teardowns</h3>
+        <div class="role">Independent research series · ongoing</div>
+        <p>
+          Teardowns of AI products I actually pay for, built from logged daily usage rather than
+          demo tours. One question runs through the series. As AI products act for users instead
+          of just answering them, where does trust break, and what would a PM measure and build
+          to fix it?
+        </p>
+        <ul class="facts">
+          <li>Flagship case built from <b>350+ real applications</b> through an AI job-search agent</li>
+          <li><b>20+ documented failures</b>, each dated and attributed to the pipeline stage that caused it</li>
+          <li>Proposed <b>Trusted Qualified Applications</b> as a replacement north star, with four instrumented proxies</li>
+          <li>Every claim labeled observed, calculated, inferred, or hypothesis</li>
+        </ul>
+        <div class="go">
+          <a href="https://github.com/pz0227/product-teardowns">Read the series</a>
+          <a href="https://pz0227.github.io/product-teardowns/">Case summary</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <h3>Trust Layer</h3>
+        <div class="role">Interactive prototype · independent concept</div>
+        <p>
+          The diagnosis turned into a product. A pre-submission gate built on one rule: critical
+          facts are read from your verified profile, never generated. Try to submit an invented
+          resume claim and watch the gate respond.
+        </p>
+        <ul class="facts">
+          <li>Read-never-generated policy for identity facts like employer, salary, and work authorization</li>
+          <li>Resume diff with a one-tap acknowledgment before anything carrying your name goes out</li>
+          <li>Designed around the tradeoff that actually matters here, <b>speed against trust</b></li>
+        </ul>
+        <div class="go">
+          <a href="https://pz0227.github.io/product-teardowns/prototypes/jobright-trust-layer/">Try the prototype</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <h3>Kapi</h3>
+        <div class="role">AI product analytics agent · built end to end</div>
+        <p>
+          An agent that answers product questions in plain language, built with retrieval and LLM
+          APIs. Then I wrote the evaluation suite, mostly because I wanted a number I could defend
+          in a room. The eval did not confirm my roadmap. It killed it.
+        </p>
+        <ul class="facts">
+          <li><b>51-case labeled evaluation suite</b> covering answer quality and appropriate refusal</li>
+          <li>I had assumed retrieval was the bottleneck. Fault attribution came out <b>19 model-side against 4 retrieval-side</b></li>
+          <li>The real problem was answering confidently when it should have refused, which is a different roadmap entirely</li>
+        </ul>
+        <div class="go">
+          <a href="https://github.com/pz0227/kapi">See the repo</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="kicker">Experience</div>
+    <div class="exp">
+
+      <div class="row">
+        <div class="when">2026 — now</div>
+        <div>
+          <h3>AI Product Manager</h3>
+          <div class="co">Digital Robotics · agent-driven analysis for regulated industries</div>
+          <p>
+            Own the Windows MVP. Took a request that arrived as one vague sentence about feature
+            parity and redefined done as <b>a target user can install, launch, recover, and relaunch
+            without a developer</b>. One-click installation replaced a developer-dependent setup.
+            Also evaluated 6+ pre-launch use cases with leadership and narrowed them to 3.
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="when">2025</div>
+        <div>
+          <h3>Data Analyst Intern</h3>
+          <div class="co">A Round Ent · consumer social, dating for Asian American users</div>
+          <p>
+            User and market research across 10+ competing apps, then worked with product, design,
+            and backend to turn recurring pain into onboarding and preference flows. Defined the
+            onboarding metrics and measured the rollout, where completion rose
+            <b>from 52% to 64%</b>.
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="when">2023 — 2024</div>
+        <div>
+          <h3>Product Manager</h3>
+          <div class="co">Fukang Import &amp; Export · sourcing for international buyers</div>
+          <p>
+            The most 0-to-1 thing I have done. No PRD, no design team. Built a weighted scorecard
+            across demand, margin, and supply risk to narrow <b>54 supplier options to 18 SKUs</b>,
+            then ran the buyer conversations myself. Produced 8 RFQs and supported five container
+            orders with <b>$300K+ gross profit</b>.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="kicker">About</div>
+    <p>
+      I studied psychology at UC Santa Barbara and then statistics, measurement, and assessment
+      at the University of Pennsylvania. Those two things do different jobs for me.
+      Psychology is why every teardown starts with something that simply feels off.
+      Statistics is why that feeling does not count until it survives evidence.
+    </p>
+    <p>
+      What I keep ending up in is the same problem wearing different clothes. A product has to be
+      trusted before anyone can use it, and nobody has decided what trusted means or how you would
+      know. That was true for clinical models, for sourcing decisions with real money behind them,
+      and it is true now for agents that act while you are not watching.
+    </p>
+    <p>
+      Currently looking for a full-time product role where the product question is still open.
+    </p>
+  </section>
+
+  <footer>
+    <div class="wrap" style="padding:0">
+      Polly Zheng ·
+      <a href="mailto:pollyzheng0227@gmail.com">pollyzheng0227@gmail.com</a> ·
+      <a href="https://www.linkedin.com/in/jh-zheng0227/">LinkedIn</a> ·
+      <a href="https://github.com/pz0227">GitHub</a> ·
+      <a href="https://x.com/pollyyyyyyy_z">X</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  var r=document.documentElement, t=document.getElementById('t');
+  var s=localStorage.getItem('theme'); if(s) r.setAttribute('data-theme',s);
+  t.onclick=function(){
+    var cur=r.getAttribute('data-theme');
+    if(!cur) cur = matchMedia('(prefers-color-scheme:dark)').matches ? 'dark':'light';
+    var next = cur==='dark' ? 'light':'dark';
+    r.setAttribute('data-theme',next); localStorage.setItem('theme',next);
+  };
+</script>
+</body>
+</html>
