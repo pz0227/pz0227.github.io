@@ -11,6 +11,25 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◎</text></svg>">
+<style>
+  /* evidence exhibits */
+  .exhibit{margin:0 0 34px}
+  .ex-img{border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.06)}
+  :root[data-theme="dark"] .ex-img{background:#fff}
+  .ex-img img{width:100%; display:block}
+  .ex-cap{display:flex; gap:14px; align-items:baseline; margin-top:11px; flex-wrap:wrap}
+  .ex-cap .d{font-family:var(--mono); font-size:11.5px; color:var(--faint); white-space:nowrap}
+  .ex-cap .t{font-size:14.5px; color:var(--dim); margin:0}
+  .ex-cap .t b{color:var(--fg); font-weight:600}
+
+  .hero-ex{margin:44px 0 0}
+  .hero-ex .ex-img{border-color:var(--accent)}
+  .verdict{margin-top:16px; padding:15px 18px; border-left:2px solid var(--accent); background:var(--panel)}
+  .verdict p{margin:0; font-size:15.5px; color:var(--fg)}
+
+  .exgrid{display:grid; grid-template-columns:1fr 1fr; gap:26px}
+  @media(max-width:720px){ .exgrid{grid-template-columns:1fr} }
+</style>
 </head>
 <body>
 <button class="tog" id="t" aria-label="Toggle theme">◐</button>
@@ -32,31 +51,45 @@
       <div class="shot shot-ph" id="shot">DROP<br>headshot.jpg<br>IN THIS<br>FOLDER</div>
     </div>
 
-    <div class="ev" style="margin-top:64px">
-      <div class="ev-top"><span class="lab">Field notes · AI job-search agent</span><span class="lab">n = 350+ applications</span></div>
-      <div class="ev-row"><div class="d">07-08</div><div>
-        <p class="w">Filled my salary expectation with <code>6500095000</code></p>
-        <p class="why">My saved range of 65,000 to 95,000, concatenated into one number. Confidently wrong beats visibly broken, because this one invites you to submit it.</p></div></div>
-      <div class="ev-row"><div class="d">07-08</div><div>
-        <p class="w">Listed an employer I have never worked for</p>
-        <p class="why">An identity-level fact, generated instead of read.</p></div></div>
-      <div class="ev-row"><div class="d">07-08</div><div>
-        <p class="w">Reported <code>11/11 required fields filled</code></p>
-        <p class="why">While the form it was submitting to flagged a missing resume. The status panel misreports execution state, which weaponizes the trust it just earned.</p></div></div>
-      <div class="ev-row"><div class="d">07-07</div><div>
-        <p class="w">Rewrote my resume and invented an <code>18%</code> improvement</p>
-        <p class="why">An interviewer asked me about phrasing I had never seen. Value lands at submit time. The cost arrives weeks later, where no dashboard is looking.</p></div></div>
-      <div class="ev-foot">Every one of these is invisible to the metric the product optimizes, because the application still goes out and the counter still increments. <b>The metric explains the failure pattern.</b></div>
+    <div class="hero-ex">
+      <div class="lab" style="margin-bottom:14px">Exhibit A · AI job-search agent · 07-08</div>
+      <div class="ex-img"><img src="img/ev-submit.png" alt="The agent reports 11 of 11 required fields filled while the application form reports two required fields missing"></div>
+      <div class="verdict"><p>On the left, the agent says the form is complete and offers to submit it for me. On the right, the same form says <b>Resume</b> and <b>Current Company</b> are missing. Both screens were open at the same time.</p></div>
     </div>
   </header>
+
+  <section>
+    <div class="head"><h2>The rest of the file</h2><div class="rule"></div><span class="lab">350+ applications</span></div>
+
+    <div class="exgrid">
+      <div class="exhibit">
+        <div class="ex-img"><img src="img/ev-salary.png" alt="Salary expectation field filled with 6500095000"></div>
+        <div class="ex-cap"><span class="d">07-08</span><p class="t"><b>My saved range, concatenated.</b> 65,000 to 95,000 became one number. Confidently wrong beats visibly broken, because this one invites you to submit it.</p></div>
+      </div>
+
+      <div class="exhibit">
+        <div class="ex-img"><img src="img/ev-employer.png" alt="Latest employer field filled with a company the user never worked for"></div>
+        <div class="ex-cap"><span class="d">07-08</span><p class="t"><b>An employer I've never worked for.</b> An identity-level fact, generated instead of read from my own profile.</p></div>
+      </div>
+    </div>
+
+    <div class="exhibit" style="margin-top:8px">
+      <div class="ex-img"><img src="img/ev-prompt.png" alt="Asked for jobs titled product manager, returned five roles with different titles at high match scores"></div>
+      <div class="ex-cap"><span class="d">08-10</span><p class="t"><b>I asked for jobs titled "product manager."</b> It returned a Product Owner, a Business Operations Associate, a Product Analyst, a Product Operations Analyst, and a Product Marketing Manager. None of them match. Two of them scored above 83%.</p></div>
+    </div>
+
+    <p style="color:var(--dim); font-size:15.5px; max-width:62ch; margin:30px 0 0">
+      Every one of these is invisible to the metric the product optimizes, because the application still goes out and the counter still increments. That's the pattern I keep finding, and it's why I think the interesting work in AI products right now is deciding what "good" means before you build, not after.
+    </p>
+  </section>
 
   <section>
     <div class="head"><h2>Case studies</h2><div class="rule"></div><span class="lab">04</span></div>
     <div class="cases">
 
       <a class="case" href="case-jobright.html">
-        <div class="c-top"><h3>Rebuilding trust in an AI job-search agent</h3><span class="c-tag">independent research + prototype</span></div>
-        <p>The notes above are mine. I traced every failure to the pipeline stage that caused it, showed why better parsing would not fix the worst ones, proposed the north star the product should have optimized, and built the gate that stops it.</p>
+        <div class="c-top"><h3>Rebuilding trust in an AI job-search agent</h3><span class="c-tag">research + working prototype</span></div>
+        <p>The exhibits above are mine. I traced every failure to the pipeline stage that caused it, showed why better parsing would not fix the worst ones, proposed the north star the product should have optimized, and built the gate that stops it.</p>
         <div class="stats">
           <div class="stat"><div class="n">350+</div><div class="t">real applications logged</div></div>
           <div class="stat"><div class="n">20+</div><div class="t">dated incidents</div></div>
@@ -67,7 +100,7 @@
 
       <a class="case" href="case-kapi.html">
         <div class="c-top"><h3>The eval that killed my roadmap</h3><span class="c-tag">Kapi · agent built end to end</span></div>
-        <p>I built an analytics agent, then wrote the evaluation suite because I wanted a number I could defend. It told me I had been optimizing the wrong half of the system for weeks.</p>
+        <p>I built an analytics agent, then wrote the evaluation suite because I wanted a number I could defend. It told me I'd been optimizing the wrong half of the system for weeks.</p>
         <div class="stats">
           <div class="stat"><div class="n">51</div><div class="t">labeled eval cases</div></div>
           <div class="stat"><div class="n">19<span style="color:var(--faint)">/</span>4</div><div class="t">failures model-side vs retrieval-side</div></div>
@@ -89,7 +122,7 @@
 
       <a class="case" href="case-onboarding.html">
         <div class="c-top"><h3>A 23% lift I refused to call causal</h3><span class="c-tag">A Round · consumer onboarding</span></div>
-        <p>Onboarding completion rose from 52% to 64% after a change I recommended. The statistics said I could not claim credit for it, so I did not. Here is what I did instead.</p>
+        <p>Onboarding completion rose from 52% to 64% after a change I recommended. The statistics said I couldn't claim credit for it, so I didn't. Here's what I did instead.</p>
         <div class="stats">
           <div class="stat"><div class="n">52→64%</div><div class="t">onboarding completion, matched 14-day windows</div></div>
           <div class="stat"><div class="n">p≈0.24</div><div class="t">not significant, and I said so</div></div>
@@ -120,7 +153,7 @@
   <section class="about">
     <div class="head"><h2>How I think about product</h2><div class="rule"></div><span class="lab">/</span></div>
     <p>Psychology at UC Santa Barbara, then statistics and measurement at Penn. Those do different jobs for me. <b>Psychology is why every teardown starts with something that simply feels off. Statistics is why that feeling does not count until it survives evidence.</b></p>
-    <p>The belief underneath all four cases above is the same. <b>Most AI products cannot tell you when they are wrong</b>, and the metric on the dashboard usually cannot either, because the action completed. It just completed wrong. Deciding what "good" means, before you build, is the product decision. Everything after that is execution.</p>
+    <p>The belief underneath all four cases is the same. <b>Most AI products cannot tell you when they are wrong</b>, and the metric on the dashboard usually cannot either, because the action completed. It just completed wrong. Deciding what "good" means, before you build, is the product decision. Everything after that is execution.</p>
     <p>I also try to be careful about what I claim. Two of the cases here include a section on what the evidence does not support. That is deliberate. A number you cannot defend in a room is worse than no number.</p>
     <p>Currently looking for a full-time product role where that question is still open.</p>
   </section>
@@ -141,8 +174,7 @@
 var r=document.documentElement,t=document.getElementById('t');
 var s=localStorage.getItem('theme'); if(s) r.setAttribute('data-theme',s);
 t.onclick=function(){var c=r.getAttribute('data-theme')||'light';var n=c==='light'?'dark':'light';r.setAttribute('data-theme',n);localStorage.setItem('theme',n)};
-// swap in headshot if present
-var im=new Image(); im.onload=function(){var d=document.getElementById('shot'); d.outerHTML='<img class="shot" src="headshot.jpg" alt="Polly Zheng">'};
+var im=new Image(); im.onload=function(){var d=document.getElementById('shot'); if(d) d.outerHTML='<img class="shot" src="headshot.jpg" alt="Polly Zheng">'};
 im.src='headshot.jpg';
 </script>
 </body>
