@@ -8,6 +8,20 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◎</text></svg>">
+<style>
+  .shot-fig{margin:30px 0}
+  .shot-fig .ex-img{border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.06)}
+  .shot-fig .ex-img img{width:100%; display:block}
+  .shot-cap{display:flex; gap:14px; align-items:baseline; margin-top:11px; flex-wrap:wrap}
+  .shot-cap .d{font-family:var(--mono); font-size:11.5px; color:var(--faint); white-space:nowrap}
+  .shot-cap .t{font-size:14.5px; color:var(--dim); margin:0}
+  .shot-cap .t b{color:var(--fg); font-weight:600}
+  .demo-wrap{margin:30px 0; border:1px solid var(--accent); border-radius:12px; overflow:hidden; background:var(--panel)}
+  .demo-bar{display:flex; justify-content:space-between; align-items:center; gap:12px; padding:11px 16px; border-bottom:1px solid var(--line); flex-wrap:wrap}
+  .demo-bar a{font-family:var(--mono); font-size:12px; color:var(--accent); text-decoration:none}
+  .demo-wrap iframe{width:100%; height:660px; border:0; display:block; background:#fff}
+  @media(max-width:620px){ .demo-wrap iframe{height:520px} }
+</style>
 </head>
 <body>
 <button class="tog" id="t" aria-label="Toggle theme">◐</button>
@@ -29,26 +43,29 @@
   <p>I am a paying user of an AI agent that finds jobs, tailors a resume for each one, fills the application, and can submit on my behalf. That last part is the whole product. I am delegating the most consequential paperwork of my professional life to something that acts while I am not watching.</p>
   <p>It is genuinely fast, which is why I paid. But across sustained daily use I kept finding output I could not stand behind. I started logging it properly, with dates and screenshots, because I wanted to know whether I was annoyed or whether something was actually broken.</p>
 
-  <div class="fig">
-    <div class="fig-t">Sample of the logged incidents</div>
-    <div class="ev" style="border:0">
-      <div class="ev-row" style="padding-left:0;padding-right:0"><div class="d">07-08</div><div>
-        <p class="w">Salary expectation filled as <code>6500095000</code></p>
-        <p class="why">My saved range of 65,000 to 95,000, concatenated into a single number.</p></div></div>
-      <div class="ev-row" style="padding-left:0;padding-right:0"><div class="d">07-08</div><div>
-        <p class="w">"Name of Latest Employer" filled with a firm I never worked at</p>
-        <p class="why">Identity-level fact, generated rather than read from my profile.</p></div></div>
-      <div class="ev-row" style="padding-left:0;padding-right:0"><div class="d">07-08</div><div>
-        <p class="w"><code>11/11 required fields filled · Submit Now</code></p>
-        <p class="why">While the ATS itself flagged the missing resume. Six screenshots of this class.</p></div></div>
-      <div class="ev-row" style="padding-left:0;padding-right:0"><div class="d">07-07</div><div>
-        <p class="w">Tailored resume invented an <code>18%</code> improvement metric</p>
-        <p class="why">A rewrite I had never seen, later probed by a real interviewer.</p></div></div>
-      <div class="ev-row" style="padding-left:0;padding-right:0"><div class="d">07-07</div><div>
-        <p class="w">3 of 7 top recommendations usable against my saved hard constraints</p>
-        <p class="why">Calculated, 43%. The feed erodes trust in the layer above the agent.</p></div></div>
-    </div>
-    <div class="fig-c">All entries dated, from my own logged usage. 20+ incidents documented in total.</div>
+  <div class="shot-fig">
+    <div class="ex-img"><img src="img/ev-submit.png" alt="Agent reports 11 of 11 required fields filled while the form reports two required fields missing"></div>
+    <div class="shot-cap"><span class="d">07-08</span><p class="t"><b>The agent says the form is complete and offers to submit it.</b> The same form, open at the same moment, says Resume and Current Company are missing. Six screenshots of this class.</p></div>
+  </div>
+
+  <div class="shot-fig">
+    <div class="ex-img"><img src="img/ev-salary.png" alt="Total compensation expectation filled with 6500095000"></div>
+    <div class="shot-cap"><span class="d">07-08</span><p class="t"><b>My saved range of 65,000 to 95,000, concatenated into one number.</b> Confidently wrong beats visibly broken, because a nonsense number that looks filled in invites you to submit it.</p></div>
+  </div>
+
+  <div class="shot-fig">
+    <div class="ex-img"><img src="img/ev-employer.png" alt="Latest employer field filled with a company the user never worked for"></div>
+    <div class="shot-cap"><span class="d">07-08</span><p class="t"><b>An employer I have never worked for.</b> This is the class that matters most. An identity-level fact was generated rather than read from my own saved profile.</p></div>
+  </div>
+
+  <div class="shot-fig">
+    <div class="ex-img"><img src="img/ev-resume.png" alt="AI-tailored resume with highlighted invented claims including an 18 percent improvement"></div>
+    <div class="shot-cap"><span class="d">07-07</span><p class="t"><b>The tailored resume, with the agent's own additions highlighted.</b> One of them claims I improved release timelines by 18%. I had never seen that sentence. An interviewer later asked me about it.</p></div>
+  </div>
+
+  <div class="shot-fig">
+    <div class="ex-img"><img src="img/ev-location.png" alt="Location preference field filled with San Francisco for a job based in Des Moines"></div>
+    <div class="shot-cap"><span class="d">07-08</span><p class="t"><b>A location preference I never gave, for a job in the wrong state.</b> The role was in Des Moines, Iowa. The agent answered San Francisco, California.</p></div>
   </div>
 
   <h3>The pattern underneath</h3>
@@ -87,17 +104,14 @@
   <p>The recommendation was a pre-submission trust layer built on one rule. <b>Critical facts are read, never generated.</b> Employer, education, work authorization, referral, salary. When the agent is unsure it stops and asks about that one application while everything else keeps flowing.</p>
   <p>I built it as a working prototype rather than a spec, and that decision paid for itself immediately. On paper I had written that the agent should pause whenever it is uncertain. Once it existed and I clicked through it, pausing on every uncertain field was unusable. <b>The real design question turned out to be which fields are worth stopping for</b>, and I only found that by having something to click.</p>
 
-  <div class="fig">
-    <div class="fig-t">Prototype · pre-submission trust layer</div>
-    <div class="funnel">
-      <div class="fn"><div class="fn-bar">Agent fills the application</div><div class="fn-n">as today</div></div>
-      <div class="fn"><div class="fn-bar">Critical fields checked against canonical profile</div><div class="fn-n">read-only policy</div></div>
-      <div class="fn"><div class="fn-bar">Unsupported claim detected in the tailored resume</div><div class="fn-n">diff shown</div></div>
-      <div class="fn"><div class="fn-bar">One-tap acknowledgment, or reject</div><div class="fn-n">user decides</div></div>
-      <div class="fn"><div class="fn-bar" style="border-color:var(--accent);color:var(--accent)">Submission gate releases</div><div class="fn-n">verified state</div></div>
+  <div class="demo-wrap">
+    <div class="demo-bar">
+      <span class="lab">Live prototype · try to submit the invented claim</span>
+      <a href="https://pz0227.github.io/product-teardowns/prototypes/jobright-trust-layer/" target="_blank" rel="noopener">Open full screen ↗</a>
     </div>
-    <div class="fig-c">Independent concept, not affiliated with the product. <a href="https://pz0227.github.io/product-teardowns/prototypes/jobright-trust-layer/" style="color:var(--accent)">Try it →</a></div>
+    <iframe src="https://pz0227.github.io/product-teardowns/prototypes/jobright-trust-layer/" title="Trust layer prototype" loading="lazy"></iframe>
   </div>
+  <p style="font-size:13.5px; color:var(--faint); margin-top:-16px">Independent concept, not affiliated with the product it critiques.</p>
 
   <span class="par res">Result</span>
   <h2>What came out of it</h2>
