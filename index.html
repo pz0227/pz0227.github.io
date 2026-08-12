@@ -4,31 +4,39 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Polly Zheng — AI Product Manager</title>
-<meta name="description" content="AI product manager. I pay for the AI agents I write about, log what they do wrong, and build the fix.">
+<meta name="description" content="AI product manager. Psychology is why I notice what feels off. Statistics is why I don't trust it until it survives evidence.">
 <meta property="og:title" content="Polly Zheng — AI Product Manager">
-<meta property="og:description" content="I pay for the AI agents I write about, log what they do wrong, and build the fix.">
+<meta property="og:description" content="Every product problem starts as a feeling. My job is finding out whether it's real.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◎</text></svg>">
 <style>
-  /* evidence exhibits */
-  .exhibit{margin:0 0 34px}
-  .ex-img{border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.06)}
-  :root[data-theme="dark"] .ex-img{background:#fff}
-  .ex-img img{width:100%; display:block}
-  .ex-cap{display:flex; gap:14px; align-items:baseline; margin-top:11px; flex-wrap:wrap}
-  .ex-cap .d{font-family:var(--mono); font-size:11.5px; color:var(--faint); white-space:nowrap}
-  .ex-cap .t{font-size:14.5px; color:var(--dim); margin:0}
-  .ex-cap .t b{color:var(--fg); font-weight:600}
+  /* method strip */
+  .method{display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); border-radius:12px; overflow:hidden; margin-top:52px; background:var(--panel)}
+  .method > div{padding:26px 28px}
+  .method > div:first-child{border-right:1px solid var(--line)}
+  .method .k{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:12px}
+  .method p{margin:0; font-size:15.5px; color:var(--dim)}
+  .method p b{color:var(--fg); font-weight:600}
+  @media(max-width:640px){ .method{grid-template-columns:1fr} .method > div:first-child{border-right:0; border-bottom:1px solid var(--line)} }
 
-  .hero-ex{margin:44px 0 0}
-  .hero-ex .ex-img{border-color:var(--accent)}
-  .verdict{margin-top:16px; padding:15px 18px; border-left:2px solid var(--accent); background:var(--panel)}
-  .verdict p{margin:0; font-size:15.5px; color:var(--fg)}
-
-  .exgrid{display:grid; grid-template-columns:1fr 1fr; gap:26px}
-  @media(max-width:720px){ .exgrid{grid-template-columns:1fr} }
+  /* case story rows */
+  .story{display:block; text-decoration:none; padding:34px 0; border-top:1px solid var(--line); transition:padding-left .18s}
+  .story:first-child{border-top:0}
+  .story:hover{padding-left:10px}
+  .story:hover h3{color:var(--accent)}
+  .st-top{display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; margin-bottom:20px}
+  .story h3{font-size:21px; font-weight:640; letter-spacing:-.022em; margin:0; transition:color .16s}
+  .st-tag{font-family:var(--mono); font-size:11px; color:var(--faint); letter-spacing:.05em}
+  .arc{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-bottom:16px}
+  .arc > div{border-left:2px solid var(--line); padding-left:14px}
+  .arc > div:last-child{border-left-color:var(--accent)}
+  .arc .k{font-family:var(--mono); font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--faint); margin-bottom:7px}
+  .arc p{margin:0; font-size:14.5px; color:var(--dim); line-height:1.55}
+  .arc p b{color:var(--fg); font-weight:600}
+  @media(max-width:700px){ .arc{grid-template-columns:1fr; gap:14px} }
+  .story .more{font-family:var(--mono); font-size:12px; color:var(--accent)}
 </style>
 </head>
 <body>
@@ -39,8 +47,8 @@
     <div class="hero-grid">
       <div>
         <div class="eyebrow"><span class="dot"></span><span class="lab">Polly Zheng · AI Product Manager · Open to roles</span></div>
-        <h1>Most AI products can't tell you <i>when they're wrong.</i></h1>
-        <p class="sub">I'm an AI product manager. I pay for the products I write about, use them daily, and log exactly where they break. <b>Then I build the thing that catches it.</b></p>
+        <h1>Every product problem starts as <i>a feeling.</i></h1>
+        <p class="sub">I'm an AI product manager. <b>Psychology is why I notice what feels off. Statistics is why I don't believe it until it survives evidence.</b> Most of my work lives in the gap between those two.</p>
         <div class="cta">
           <a class="hi" href="mailto:pollyzheng0227@gmail.com">Email me</a>
           <a href="https://www.linkedin.com/in/jh-zheng0227/">LinkedIn</a>
@@ -51,82 +59,58 @@
       <div class="shot shot-ph" id="shot">DROP<br>headshot.jpg<br>IN THIS<br>FOLDER</div>
     </div>
 
-    <div class="hero-ex">
-      <div class="lab" style="margin-bottom:14px">Exhibit A · AI job-search agent · 07-08</div>
-      <div class="ex-img"><img src="img/ev-submit.png" alt="The agent reports 11 of 11 required fields filled while the application form reports two required fields missing"></div>
-      <div class="verdict"><p>On the left, the agent says the form is complete and offers to submit it for me. On the right, the same form says <b>Resume</b> and <b>Current Company</b> are missing. Both screens were open at the same time.</p></div>
+    <div class="method">
+      <div>
+        <div class="k">Psychology · UC Santa Barbara</div>
+        <p>People rarely tell you the real reason. They tell you a reason. <b>Noticing the gap is where every product question I've cared about started</b>, whether it was a user abandoning onboarding or an agent quietly misrepresenting someone.</p>
+      </div>
+      <div>
+        <div class="k">Statistics &amp; Measurement · Penn</div>
+        <p>A hunch that can't be checked is just taste with confidence. So I define what "good" means before I build, and <b>I say out loud when the evidence doesn't support the claim I'd like to make.</b> Twice below, it didn't.</p>
+      </div>
     </div>
   </header>
 
   <section>
-    <div class="head"><h2>The rest of the file</h2><div class="rule"></div><span class="lab">350+ applications</span></div>
-
-    <div class="exgrid">
-      <div class="exhibit">
-        <div class="ex-img"><img src="img/ev-salary.png" alt="Salary expectation field filled with 6500095000"></div>
-        <div class="ex-cap"><span class="d">07-08</span><p class="t"><b>My saved range, concatenated.</b> 65,000 to 95,000 became one number. Confidently wrong beats visibly broken, because this one invites you to submit it.</p></div>
-      </div>
-
-      <div class="exhibit">
-        <div class="ex-img"><img src="img/ev-employer.png" alt="Latest employer field filled with a company the user never worked for"></div>
-        <div class="ex-cap"><span class="d">07-08</span><p class="t"><b>An employer I've never worked for.</b> An identity-level fact, generated instead of read from my own profile.</p></div>
-      </div>
-    </div>
-
-    <div class="exhibit" style="margin-top:8px">
-      <div class="ex-img"><img src="img/ev-prompt.png" alt="Asked for jobs titled product manager, returned five roles with different titles at high match scores"></div>
-      <div class="ex-cap"><span class="d">08-10</span><p class="t"><b>I asked for jobs titled "product manager."</b> It returned a Product Owner, a Business Operations Associate, a Product Analyst, a Product Operations Analyst, and a Product Marketing Manager. None of them match. Two of them scored above 83%.</p></div>
-    </div>
-
-    <p style="color:var(--dim); font-size:15.5px; max-width:62ch; margin:30px 0 0">
-      Every one of these is invisible to the metric the product optimizes, because the application still goes out and the counter still increments. That's the pattern I keep finding, and it's why I think the interesting work in AI products right now is deciding what "good" means before you build, not after.
-    </p>
-  </section>
-
-  <section>
-    <div class="head"><h2>Case studies</h2><div class="rule"></div><span class="lab">04</span></div>
+    <div class="head"><h2>Four times I noticed something and checked</h2><div class="rule"></div><span class="lab">04</span></div>
     <div class="cases">
 
-      <a class="case" href="case-jobright.html">
-        <div class="c-top"><h3>Rebuilding trust in an AI job-search agent</h3><span class="c-tag">research + working prototype</span></div>
-        <p>The exhibits above are mine. I traced every failure to the pipeline stage that caused it, showed why better parsing would not fix the worst ones, proposed the north star the product should have optimized, and built the gate that stops it.</p>
-        <div class="stats">
-          <div class="stat"><div class="n">350+</div><div class="t">real applications logged</div></div>
-          <div class="stat"><div class="n">20+</div><div class="t">dated incidents</div></div>
-          <div class="stat"><div class="n">4</div><div class="t">instrumented proxies behind the new north star</div></div>
+      <a class="story" href="case-onboarding.html">
+        <div class="st-top"><h3>A 23% lift I refused to call causal</h3><span class="st-tag">A Round · consumer onboarding</span></div>
+        <div class="arc">
+          <div><div class="k">What felt off</div><p>We asked people to describe their dating preferences in writing, at the exact moment they had the least patience and the least investment.</p></div>
+          <div><div class="k">What I did</div><p>Scored 10 opportunities down to 3, shipped a visual taxonomy, and defined the metrics and analytics schema <b>before</b> the rollout.</p></div>
+          <div><div class="k">What the evidence said</div><p>Completion rose 52% to 64%. But <b>p ≈ 0.24 and it wasn't randomized</b>, so I called it directional and asked for a real experiment.</p></div>
         </div>
         <span class="more">Read the case →</span>
       </a>
 
-      <a class="case" href="case-kapi.html">
-        <div class="c-top"><h3>The eval that killed my roadmap</h3><span class="c-tag">Kapi · agent built end to end</span></div>
-        <p>I built an analytics agent, then wrote the evaluation suite because I wanted a number I could defend. It told me I'd been optimizing the wrong half of the system for weeks.</p>
-        <div class="stats">
-          <div class="stat"><div class="n">51</div><div class="t">labeled eval cases</div></div>
-          <div class="stat"><div class="n">19<span style="color:var(--faint)">/</span>4</div><div class="t">failures model-side vs retrieval-side</div></div>
-          <div class="stat"><div class="n">0.52</div><div class="t">competence score, the number I had to say out loud</div></div>
+      <a class="story" href="case-kapi.html">
+        <div class="st-top"><h3>The eval that killed my roadmap</h3><span class="st-tag">Kapi · agent built end to end</span></div>
+        <div class="arc">
+          <div><div class="k">What felt off</div><p>The agent I'd built demoed beautifully, which bothered me, because every AI product demos beautifully when you're the one driving.</p></div>
+          <div><div class="k">What I did</div><p>Wrote a 51-case labeled eval scoring competence and honesty separately, then attributed every failure to a component.</p></div>
+          <div><div class="k">What the evidence said</div><p><b>19 model-side against 4 retrieval-side.</b> I'd spent weeks on retrieval. It was fine. I was wrong, and I changed direction.</p></div>
         </div>
         <span class="more">Read the case →</span>
       </a>
 
-      <a class="case" href="case-windows.html">
-        <div class="c-top"><h3>What does "works on Windows" actually mean?</h3><span class="c-tag">Digital Robotics · MVP definition</span></div>
-        <p>A request arrived as one vague sentence about feature parity. Engineering and users had completely different definitions of done, and nobody had picked one. So I did.</p>
-        <div class="stats">
-          <div class="stat"><div class="n">2</div><div class="t">user groups the MVP was defined around</div></div>
-          <div class="stat"><div class="n">4</div><div class="t">categories of acceptance criteria</div></div>
-          <div class="stat"><div class="n">6→3</div><div class="t">pre-launch use cases narrowed with leadership</div></div>
+      <a class="story" href="case-jobright.html">
+        <div class="st-top"><h3>Rebuilding trust in an AI agent</h3><span class="st-tag">independent research + prototype</span></div>
+        <div class="arc">
+          <div><div class="k">What felt off</div><p>An agent I pay for filed applications on my behalf, and the output started saying things about me I couldn't defend in a room.</p></div>
+          <div><div class="k">What I did</div><p>Logged 350+ applications with dates and screenshots, attributed each failure to a pipeline stage, then built the gate that stops it.</p></div>
+          <div><div class="k">What the evidence said</div><p>Every failure was invisible to the metric being optimized. <b>The metric explained the failures</b>, so I replaced it and instrumented the replacement.</p></div>
         </div>
         <span class="more">Read the case →</span>
       </a>
 
-      <a class="case" href="case-onboarding.html">
-        <div class="c-top"><h3>A 23% lift I refused to call causal</h3><span class="c-tag">A Round · consumer onboarding</span></div>
-        <p>Onboarding completion rose from 52% to 64% after a change I recommended. The statistics said I couldn't claim credit for it, so I didn't. Here's what I did instead.</p>
-        <div class="stats">
-          <div class="stat"><div class="n">52→64%</div><div class="t">onboarding completion, matched 14-day windows</div></div>
-          <div class="stat"><div class="n">p≈0.24</div><div class="t">not significant, and I said so</div></div>
-          <div class="stat"><div class="n">10→3</div><div class="t">opportunities scored down to MVP bets</div></div>
+      <a class="story" href="case-windows.html">
+        <div class="st-top"><h3>What does "works on Windows" actually mean?</h3><span class="st-tag">Digital Robotics · MVP definition</span></div>
+        <div class="arc">
+          <div><div class="k">What felt off</div><p>Everyone agreed on the goal and nobody agreed on what done meant. Engineering, users, and our own demo team each had a different answer.</p></div>
+          <div><div class="k">What I did</div><p>Defined the MVP around two user groups and moved the bar from "the software runs" to "a target user can install, launch, recover, and relaunch it alone."</p></div>
+          <div><div class="k">What the evidence said</div><p>The win wasn't the 7-second launch. It was that <b>demos stopped needing an engineer in the room.</b></p></div>
         </div>
         <span class="more">Read the case →</span>
       </a>
@@ -137,25 +121,24 @@
   <section>
     <div class="head"><h2>Experience</h2><div class="rule"></div><span class="lab">04</span></div>
     <div class="job"><div class="yr">2026 —</div><div>
-      <h3>AI Product Manager</h3><div class="co">Digital Robotics</div>
-      <p>Own the Windows MVP for an agent-driven analysis product in regulated industries. Narrowed 6+ pre-launch use cases to 3 with leadership, scored on customer relevance, technical readiness, and dependency risk.</p></div></div>
+      <h3>AI Product Manager</h3><div class="co">Digital Robotics · agent-driven analysis, regulated industries</div>
+      <p>Own the Windows MVP. Narrowed 6+ pre-launch use cases to 3 with leadership, scored on customer relevance, technical readiness, and dependency risk.</p></div></div>
     <div class="job"><div class="yr">2025</div><div>
       <h3>Data Analyst Intern</h3><div class="co">A Round Ent · consumer social</div>
       <p>Scored 10 product opportunities down to 3 MVP bets, then measured the rollout of the one that shipped using <b>GA4 funnel exploration on matched 14-day windows</b>.</p></div></div>
     <div class="job"><div class="yr">2023 — 24</div><div>
       <h3>Product Manager</h3><div class="co">Fukang Import &amp; Export · cookware trading</div>
-      <p>A weighted scorecard across demand, margin, MOQ, lead time, and shipping economics narrowed <b>54 SKUs to 18 launch-ready</b>. Structured the buyer pipeline that produced 8 RFQs from 122 accounts.</p></div></div>
+      <p>A weighted scorecard across demand, margin, MOQ, lead time, and shipping economics narrowed <b>54 SKUs to 18 launch-ready</b>. I ran the buyer conversations myself, 122 accounts down to 8 RFQs.</p></div></div>
     <div class="job"><div class="yr">2024</div><div>
       <h3>Data Scientist, weekends</h3><div class="co">Aspiring Educational Counseling Studio</div>
       <p>Built the assessment analytics pipeline in R. Rasch and 2PL models over roughly <b>40 to 50 thousand item-level responses</b>. Reporting went from one or two days per cycle to about two or three hours.</p></div></div>
   </section>
 
   <section class="about">
-    <div class="head"><h2>How I think about product</h2><div class="rule"></div><span class="lab">/</span></div>
-    <p>Psychology at UC Santa Barbara, then statistics and measurement at Penn. Those do different jobs for me. <b>Psychology is why every teardown starts with something that simply feels off. Statistics is why that feeling does not count until it survives evidence.</b></p>
-    <p>The belief underneath all four cases is the same. <b>Most AI products cannot tell you when they are wrong</b>, and the metric on the dashboard usually cannot either, because the action completed. It just completed wrong. Deciding what "good" means, before you build, is the product decision. Everything after that is execution.</p>
-    <p>I also try to be careful about what I claim. Two of the cases here include a section on what the evidence does not support. That is deliberate. A number you cannot defend in a room is worse than no number.</p>
-    <p>Currently looking for a full-time product role where that question is still open.</p>
+    <div class="head"><h2>What I'm looking for</h2><div class="rule"></div><span class="lab">/</span></div>
+    <p>A full-time product role where the question is still open. I'm most useful early, when nobody has decided yet what the product is supposed to be good at, because that decision is the one everything else inherits.</p>
+    <p>The thread through all four cases is the same. <b>A product has to be trusted before anyone can use it, and usually nobody has defined what trusted means or how you would know.</b> That was true for clinical assessment models, for sourcing decisions with real money behind them, and it's true now for agents that act while you aren't watching.</p>
+    <p>I try to be careful about what I claim. Two of the cases above include a section on what the evidence does not support, which is deliberate. <b>A number you can't defend in a room is worse than no number.</b></p>
   </section>
 
   <footer>
